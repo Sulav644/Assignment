@@ -51,14 +51,15 @@ class ProfileHeader extends StatelessWidget {
                 ),
               ],
             ),
-            ElevatedButton(
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)))),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-                child: Text('Load'))
+            AddIcon()
+            // ElevatedButton(
+            //     style: ButtonStyle(
+            //         shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.circular(20)))),
+            //     onPressed: () {
+            //       Scaffold.of(context).openDrawer();
+            //     },
+            //     child: Text('Load'))
           ],
         ),
       ],

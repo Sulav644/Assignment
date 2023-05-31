@@ -35,7 +35,7 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final spc = Space(context: context);
-    double drawerIconMinGap = spc.hghtRat(0.02);
+    double drawerIconMinGap = spc.hghtRat(0.01);
     int i = 0;
     return SafeArea(
       child: AnimatedContainer(
@@ -58,22 +58,24 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
                           Row(
                             children: [
                               Container(
-                                width: 10,
-                                height: 10,
+                                width: 8,
+                                height: 8,
                                 decoration: BoxDecoration(
                                     color: (() {
                                       if (i == 0) {
-                                        return Colors.brown;
+                                        return Color.fromARGB(
+                                            255, 168, 118, 100);
                                       } else if (i == 1) {
-                                        return Colors.orange;
+                                        return Color.fromARGB(
+                                            255, 243, 183, 92);
                                       } else {
-                                        return Colors.blue;
+                                        return Colors.green;
                                       }
                                     }()),
                                     borderRadius: BorderRadius.circular(100)),
                               ),
                               const SizedBox(
-                                width: 8,
+                                width: 6,
                               ),
                             ],
                           ),
@@ -88,7 +90,9 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
                         onClick: () => resizeDrawer(),
                       ),
                       SizedBox(
-                        height: spc.hghtRat(0.034),
+                        height: expandDrawer
+                            ? spc.hghtRat(0.035)
+                            : spc.hghtRat(0.02),
                       ),
                       if (expandDrawer && showDrawerTitles)
                         Padding(
@@ -97,8 +101,8 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
                           child: Container(
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: const Color.fromARGB(
-                                        255, 194, 191, 191)),
+                                    width: 0.5,
+                                    color: Color.fromARGB(255, 223, 219, 219)),
                                 borderRadius: BorderRadius.circular(10)),
                             child: TabBar(
                                 indicator: BoxDecoration(
@@ -143,11 +147,18 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
                           padding: const EdgeInsets.only(left: 10),
                           child: GestureDetector(
                               onTap: () => resizeDrawer(),
-                              child: const Icon(Icons.search,
-                                  color: Color.fromARGB(255, 116, 112, 112))),
+                              child: SvgPicture.asset(
+                                'assets/images/search.svg',
+                                height: 18,
+                                colorFilter: ColorFilter.mode(
+                                    Color.fromARGB(255, 116, 112, 112),
+                                    BlendMode.srcIn),
+                              )),
                         ),
                       SizedBox(
-                        height: drawerIconMinGap,
+                        height: expandDrawer
+                            ? spc.hghtRat(0.005)
+                            : spc.hghtRat(0.02),
                       ),
                       if (!expandDrawer)
                         GestureDetector(
@@ -174,191 +185,209 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
                               )),
                         ),
                       SizedBox(
-                        height: drawerIconMinGap,
+                        height: spc.hghtRat(0.02),
                       ),
                       drawerItemWithSvg(
-                        svgPath: 'grid.svg',
-                        title: 'Dashboard',
-                        color: iconIndex == 0
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        svgColor: iconIndex == 0
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        onClick: () {
-                          setState(() {
-                            iconIndex = 0;
-                          });
-                          resizeDrawer();
-                        },
-                      ),
+                          svgPath: 'grid.svg',
+                          title: 'Dashboard',
+                          color: iconIndex == 0
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          svgColor: iconIndex == 0
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          onIconClick: () {
+                            setState(() {
+                              iconIndex = 0;
+                            });
+                            resizeDrawer();
+                          },
+                          onItemClick: () => setState(() {
+                                iconIndex = 0;
+                              })),
                       SizedBox(
                         height: drawerIconMinGap,
                       ),
                       drawerItem(
-                        icon: Icons.shop_outlined,
-                        title: 'Product',
-                        textColor: iconIndex == 1
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        iconColor: iconIndex == 1
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        onClick: () {
-                          setState(() {
-                            iconIndex = 1;
-                          });
-                          resizeDrawer();
-                        },
-                      ),
+                          icon: Icons.shop_outlined,
+                          title: 'Product',
+                          textColor: iconIndex == 1
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          iconColor: iconIndex == 1
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          onIconClick: () {
+                            setState(() {
+                              iconIndex = 1;
+                            });
+                            resizeDrawer();
+                          },
+                          onItemClick: () => setState(() {
+                                iconIndex = 1;
+                              })),
                       SizedBox(
                         height: drawerIconMinGap,
                       ),
                       drawerItemWithSvg(
-                        svgPath: 'open_mail.svg',
-                        title: 'Mail',
-                        color: iconIndex == 2
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        svgColor: iconIndex == 2
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        onClick: () {
-                          setState(() {
-                            iconIndex = 2;
-                          });
-                          resizeDrawer();
-                        },
-                      ),
+                          svgPath: 'open_mail.svg',
+                          title: 'Mail',
+                          color: iconIndex == 2
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          svgColor: iconIndex == 2
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          onIconClick: () {
+                            setState(() {
+                              iconIndex = 2;
+                            });
+                            resizeDrawer();
+                          },
+                          onItemClick: () => setState(() {
+                                iconIndex = 2;
+                              })),
                       SizedBox(
                         height: drawerIconMinGap,
                       ),
                       drawerItemWithSvg(
-                        svgPath: 'flag.svg',
-                        title: 'Campaigns',
-                        color: iconIndex == 3
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        svgColor: iconIndex == 3
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        onClick: () {
-                          setState(() {
-                            iconIndex = 3;
-                          });
-                          resizeDrawer();
-                        },
-                      ),
+                          svgPath: 'flag.svg',
+                          title: 'Campaigns',
+                          color: iconIndex == 3
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          svgColor: iconIndex == 3
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          onIconClick: () {
+                            setState(() {
+                              iconIndex = 3;
+                            });
+                            resizeDrawer();
+                          },
+                          onItemClick: () => setState(() {
+                                iconIndex = 3;
+                              })),
                       SizedBox(
                         height: drawerIconMinGap,
                       ),
                       drawerItem(
-                        icon: Icons.calendar_month_outlined,
-                        title: 'Calender',
-                        textColor: iconIndex == 4
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        iconColor: iconIndex == 4
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        onClick: () {
-                          setState(() {
-                            iconIndex = 4;
-                          });
-                          resizeDrawer();
-                        },
-                      ),
+                          icon: Icons.calendar_month_outlined,
+                          title: 'Calender',
+                          textColor: iconIndex == 4
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          iconColor: iconIndex == 4
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          onIconClick: () {
+                            setState(() {
+                              iconIndex = 4;
+                            });
+                            resizeDrawer();
+                          },
+                          onItemClick: () => setState(() {
+                                iconIndex = 4;
+                              })),
                       SizedBox(
                         height: drawerIconMinGap,
                       ),
                       drawerItem(
-                        icon: Icons.contact_page_outlined,
-                        title: 'Contacts',
-                        textColor: iconIndex == 5
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        iconColor: iconIndex == 5
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        onClick: () {
-                          setState(() {
-                            iconIndex = 5;
-                          });
-                          resizeDrawer();
-                        },
-                      ),
+                          icon: Icons.contact_page_outlined,
+                          title: 'Contacts',
+                          textColor: iconIndex == 5
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          iconColor: iconIndex == 5
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          onIconClick: () {
+                            setState(() {
+                              iconIndex = 5;
+                            });
+                            resizeDrawer();
+                          },
+                          onItemClick: () => setState(() {
+                                iconIndex = 5;
+                              })),
                       SizedBox(
-                        height: spc.hghtRat(0.04),
+                        height: spc.hghtRat(0.055),
                       ),
                       if (expandDrawer)
                         const Text(
                           'ACCOUNT',
                           style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 11,
                               color: Color.fromARGB(255, 116, 112, 112),
                               fontWeight: FontWeight.w600),
                         ),
                       SizedBox(
-                        height: drawerIconMinGap,
+                        height: spc.hghtRat(0.02),
                       ),
                       drawerItemWithSvgAndTag(
-                        svgPath: 'notification.svg',
-                        title: 'Notifications',
-                        tag: '24',
-                        color: const Color.fromARGB(255, 165, 248, 167),
-                        svgColor: iconIndex == 6
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        textColor: iconIndex == 6
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        onClick: () {
-                          setState(() {
-                            iconIndex = 6;
-                          });
-                          resizeDrawer();
-                        },
-                      ),
+                          svgPath: 'notification.svg',
+                          title: 'Notifications',
+                          tag: '24',
+                          color: const Color.fromARGB(255, 165, 248, 167),
+                          svgColor: iconIndex == 6
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          textColor: iconIndex == 6
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          onIconClick: () {
+                            setState(() {
+                              iconIndex = 6;
+                            });
+                            resizeDrawer();
+                          },
+                          onItemClick: () => setState(() {
+                                iconIndex = 6;
+                              })),
                       SizedBox(
                         height: drawerIconMinGap,
                       ),
                       drawerItemWithSvgAndTag(
-                        svgPath: 'chat.svg',
-                        title: 'Chat',
-                        tag: '8',
-                        color: const Color.fromARGB(255, 241, 191, 115),
-                        svgColor: iconIndex == 7
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        textColor: iconIndex == 7
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        onClick: () {
-                          setState(() {
-                            iconIndex = 7;
-                          });
-                          resizeDrawer();
-                        },
-                      ),
+                          svgPath: 'chat.svg',
+                          title: 'Chat',
+                          tag: '8',
+                          color: const Color.fromARGB(255, 241, 191, 115),
+                          svgColor: iconIndex == 7
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          textColor: iconIndex == 7
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          onIconClick: () {
+                            setState(() {
+                              iconIndex = 7;
+                            });
+                            resizeDrawer();
+                          },
+                          onItemClick: () => setState(() {
+                                iconIndex = 7;
+                              })),
                       SizedBox(
                         height: drawerIconMinGap,
                       ),
                       drawerItemWithSvg(
-                        svgPath: 'filter.svg',
-                        title: 'Settings',
-                        color: iconIndex == 8
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        svgColor: iconIndex == 8
-                            ? Colors.black
-                            : const Color.fromARGB(255, 116, 112, 112),
-                        onClick: () {
-                          setState(() {
-                            iconIndex = 8;
-                          });
-                          resizeDrawer();
-                        },
-                      ),
+                          svgPath: 'filter.svg',
+                          title: 'Settings',
+                          color: iconIndex == 8
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          svgColor: iconIndex == 8
+                              ? Colors.black
+                              : const Color.fromARGB(255, 116, 112, 112),
+                          onIconClick: () {
+                            setState(() {
+                              iconIndex = 8;
+                            });
+                            resizeDrawer();
+                          },
+                          onItemClick: () => setState(() {
+                                iconIndex = 8;
+                              })),
                       if (!expandDrawer)
                         Expanded(
                             child: Padding(
@@ -400,8 +429,9 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
                                           decoration: BoxDecoration(
                                               color: Colors.white,
                                               border: Border.all(
+                                                  width: 0.5,
                                                   color: const Color.fromARGB(
-                                                      255, 194, 191, 191)),
+                                                      255, 223, 219, 219)),
                                               borderRadius:
                                                   BorderRadius.circular(20)),
                                           child: Padding(
@@ -446,7 +476,7 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
                                                                         13),
                                                               ),
                                                               SizedBox(
-                                                                height: 5,
+                                                                height: 4,
                                                               ),
                                                               Text(
                                                                 'nina_org@orgemia.com',
@@ -456,9 +486,9 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
                                                                     color: Color
                                                                         .fromARGB(
                                                                             255,
-                                                                            61,
-                                                                            58,
-                                                                            58)),
+                                                                            119,
+                                                                            114,
+                                                                            114)),
                                                               ),
                                                             ]),
                                                       ],
@@ -479,8 +509,8 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
                                       ],
                                     ),
                                   ),
-                                  const SizedBox(
-                                    height: 18,
+                                  SizedBox(
+                                    height: spc.hghtRat(0.035),
                                   ),
                                 ],
                               )),
@@ -495,11 +525,12 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
           required String title,
           required Color textColor,
           required Color iconColor,
-          required VoidCallback onClick}) =>
+          required VoidCallback onIconClick,
+          required VoidCallback onItemClick}) =>
       Padding(
         padding: EdgeInsets.only(left: expandDrawer ? 0 : 10),
         child: GestureDetector(
-          onTap: () => onClick(),
+          onTap: () => onIconClick(),
           child: Row(
             children: [
               Container(
@@ -512,10 +543,15 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
                 ),
               ),
               if (expandDrawer && showDrawerTitles)
-                Text(
-                  title,
-                  style:
-                      TextStyle(color: textColor, fontWeight: FontWeight.w500),
+                GestureDetector(
+                  onTap: () => onItemClick(),
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                        color: textColor,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 13.5),
+                  ),
                 ),
             ],
           ),
@@ -528,56 +564,62 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
           required Color svgColor,
           required Color textColor,
           required Color color,
-          required VoidCallback onClick}) =>
+          required VoidCallback onIconClick,
+          required VoidCallback onItemClick}) =>
       Padding(
         padding: EdgeInsets.only(left: expandDrawer ? 0 : 10),
-        child: GestureDetector(
-          onTap: () => onClick(),
-          child: Row(
-            children: [
-              Container(
-                width: 35,
-                height: 30,
-                alignment: Alignment.centerLeft,
+        child: Row(
+          children: [
+            Container(
+              width: 35,
+              height: 30,
+              alignment: Alignment.centerLeft,
+              child: GestureDetector(
+                onTap: () => onIconClick(),
                 child: SvgPicture.asset(
                   'assets/images/$svgPath',
                   height: 20,
                   colorFilter: ColorFilter.mode(svgColor, BlendMode.srcIn),
                 ),
               ),
-              if (expandDrawer && showDrawerTitles)
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
+            ),
+            if (expandDrawer && showDrawerTitles)
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () => onItemClick(),
+                      child: Text(
                         title,
                         style: TextStyle(
-                            color: textColor, fontWeight: FontWeight.w500),
+                            color: textColor,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 13.5),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            right: Space(context: context).wdRat(0.08)),
-                        child: Container(
-                          width: 25,
-                          height: 25,
-                          decoration: BoxDecoration(
-                              color: color,
-                              borderRadius: BorderRadius.circular(100)),
-                          alignment: Alignment.center,
-                          child: Text(
-                            tag,
-                            style: const TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.w500),
-                          ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          right: Space(context: context).wdRat(0.08)),
+                      child: Container(
+                        width: 25,
+                        height: 25,
+                        decoration: BoxDecoration(
+                            color: color,
+                            borderRadius: BorderRadius.circular(100)),
+                        alignment: Alignment.center,
+                        child: Text(
+                          tag,
+                          style: const TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.w500),
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    )
+                  ],
                 ),
-            ],
-          ),
+              ),
+          ],
         ),
       );
   Widget drawerItemWithSvg(
@@ -585,30 +627,37 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
           required String title,
           required Color color,
           required Color svgColor,
-          required VoidCallback onClick}) =>
+          required VoidCallback onIconClick,
+          required VoidCallback onItemClick}) =>
       Padding(
         padding: EdgeInsets.only(left: expandDrawer ? 0 : 10),
-        child: GestureDetector(
-          onTap: () => onClick(),
-          child: Row(
-            children: [
-              Container(
-                width: 35,
-                height: 30,
-                alignment: Alignment.centerLeft,
+        child: Row(
+          children: [
+            Container(
+              width: 35,
+              height: 30,
+              alignment: Alignment.centerLeft,
+              child: GestureDetector(
+                onTap: () => onIconClick(),
                 child: SvgPicture.asset(
                   'assets/images/$svgPath',
                   height: 20,
                   colorFilter: ColorFilter.mode(svgColor, BlendMode.srcIn),
                 ),
               ),
-              if (expandDrawer && showDrawerTitles)
-                Text(
+            ),
+            if (expandDrawer && showDrawerTitles)
+              GestureDetector(
+                onTap: () => onItemClick(),
+                child: Text(
                   title,
-                  style: TextStyle(color: color, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      color: color,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 13.5),
                 ),
-            ],
-          ),
+              ),
+          ],
         ),
       );
   Widget drawerImageHeader(
@@ -618,50 +667,55 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
           required VoidCallback onClick}) =>
       Padding(
         padding: EdgeInsets.only(left: expandDrawer ? 0 : 10),
-        child: GestureDetector(
-          onTap: () => onClick(),
-          child: Row(
-            children: [
-              Image.asset(
+        child: Row(
+          children: [
+            GestureDetector(
+              onTap: () => onClick(),
+              child: Image.asset(
                 imgPath,
                 width: 20,
               ),
-              if (expandDrawer && showDrawerTitles)
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: Space(context: context).wdRat(0.03),
-                          ),
-                          Text(
-                            title,
-                            style: TextStyle(fontWeight: FontWeight.w500),
-                          ),
-                          const SizedBox(
-                            width: 6,
-                          ),
-                          const Text(
-                            'v1.0',
-                            style: TextStyle(fontSize: 10),
-                          )
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            right: Space(context: context).wdRat(0.08)),
-                        child: const Icon(
-                          Icons.search,
-                          color: Color.fromARGB(255, 116, 112, 112),
+            ),
+            if (expandDrawer && showDrawerTitles)
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          width: Space(context: context).wdRat(0.03),
                         ),
-                      )
-                    ],
-                  ),
+                        Text(
+                          title,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 13),
+                        ),
+                        const SizedBox(
+                          width: 6,
+                        ),
+                        const Text(
+                          'v1.0',
+                          style: TextStyle(fontSize: 10),
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          right: Space(context: context).wdRat(0.08)),
+                      child: SvgPicture.asset(
+                        'assets/images/search.svg',
+                        height: 18,
+                        colorFilter: ColorFilter.mode(
+                            Color.fromARGB(255, 116, 112, 112),
+                            BlendMode.srcIn),
+                      ),
+                    )
+                  ],
                 ),
-            ],
-          ),
+              ),
+          ],
         ),
       );
 }
