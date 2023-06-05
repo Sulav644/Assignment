@@ -1,7 +1,11 @@
-import 'package:assignment_project/profile_page/profile_page.dart';
+import 'package:country_flags/country_flags.dart';
+import 'package:country_picker/country_picker.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xoomship/profile_page/profile_page.dart';
 import 'package:flutter/material.dart';
 
 import '../utils.dart';
+import 'bloc/country_flag_cubit.dart';
 
 class ProfileBannerCentered extends StatelessWidget {
   final Color nameColor;
@@ -11,8 +15,11 @@ class ProfileBannerCentered extends StatelessWidget {
   final Color iconBgColor;
   final String imgPath;
   final String name;
-  final int messages;
+  final String messages;
   final bool hasShadow;
+  final String flag;
+  final String countryName;
+  final int index;
   const ProfileBannerCentered(
       {super.key,
       required this.imgPath,
@@ -23,7 +30,10 @@ class ProfileBannerCentered extends StatelessWidget {
       required this.iconColor,
       required this.nameColor,
       required this.msgColor,
-      required this.iconBgColor});
+      required this.iconBgColor,
+      required this.flag,
+      required this.index,
+      required this.countryName});
 
   @override
   Widget build(BuildContext context) {
@@ -68,23 +78,45 @@ class ProfileBannerCentered extends StatelessWidget {
                   bottom: spc.wdRat(0.05)),
               child: Column(
                 children: [
-                  CircleAvatar(
-                      backgroundColor: iconBgColor,
-                      radius: 22,
-                      child: Image.asset('assets/images/$imgPath')),
+                  GestureDetector(
+                    onTap: () {
+                      showCountryPicker(
+                        context: context,
+                        showPhoneCode: false,
+                        onSelect: (value) {
+                          context.read<CountryFlagCubit>().setFlage(
+                              index: index,
+                              flag: value.countryCode,
+                              countryName: value.displayName.substring(
+                                  0, value.displayName.indexOf('(')));
+                          print(value.countryCode == 'AL');
+                          print(value.countryCode);
+                        },
+                      );
+                    },
+                    child: CountryFlag.fromCountryCode(
+                      '$flag',
+                      height: 48,
+                      width: 50,
+                      borderRadius: 100,
+                    ),
+                  ),
                   const SizedBox(
                     height: 18,
                   ),
                   Text(
-                    name,
+                    countryName,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                        color: nameColor, fontWeight: FontWeight.w600),
+                        color: nameColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: countryName.split(' ').length > 1 ? 12 : 14),
                   ),
                   const SizedBox(
                     height: 8,
                   ),
                   Text(
-                    '$messages messages',
+                    '$messages',
                     style: TextStyle(
                         color: msgColor,
                         fontSize: 10,

@@ -1,4 +1,4 @@
-import '../../all_contacts/data/add_data.dart';
+import '../../all_contacts/data/models/add_data.dart';
 
 const addData = AddData(
     accountTypeId: 2,

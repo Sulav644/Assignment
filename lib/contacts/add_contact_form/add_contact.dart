@@ -1,41 +1,38 @@
-import 'package:assignment_app/assignment/contacts/add_contact_form/components/contact_type_field.dart';
-import 'package:assignment_app/assignment/contacts/add_contact_form/domain/add_data_cubit.dart';
-import 'package:assignment_app/assignment/contacts/add_contact_form/domain/add_store_cubit.dart';
-import 'package:assignment_app/assignment/contacts/add_contact_form/components/email_field.dart';
-import 'package:assignment_app/assignment/contacts/add_contact_form/components/location_fields.dart';
-import 'package:assignment_app/assignment/contacts/add_contact_form/components/password_input_field.dart';
-import 'package:assignment_app/assignment/contacts/add_contact_form/components/phone_field.dart';
-import 'package:assignment_app/assignment/contacts/add_contact_form/components/store_field.dart';
-import 'package:assignment_app/assignment/contacts/add_contact_form/components/toggle_button.dart';
-import 'package:assignment_app/assignment/contacts/add_contact_form/domain/is_enabled_product_upload_cubit.dart';
-import 'package:assignment_app/assignment/contacts/add_contact_form/domain/store_temp_list_cubit.dart';
-import 'package:assignment_app/assignment/contacts/all_contacts/all_contacts.dart';
-import 'package:assignment_app/assignment/contacts/all_contacts/data/data_response_notifier.dart';
-import 'package:assignment_app/core/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../core/components/db_helper.dart';
-import '../../../main.dart';
-import '../all_contacts/data/add_data.dart';
-import '../all_contacts/data/data_repository.dart';
+import '../../core/utils.dart';
+import '../all_contacts/all_contacts.dart';
+import '../all_contacts/data/models/add_data.dart';
+import '../all_contacts/data/data_notifier.dart';
+import 'components/contact_type_field.dart';
+import 'components/email_field.dart';
+import 'components/location_fields.dart';
 import 'components/name_input_field.dart';
+import 'components/password_input_field.dart';
+import 'components/phone_field.dart';
+import 'components/store_field.dart';
+import 'components/toggle_button.dart';
 import 'data/form_use_type.dart';
+import 'domain/add_data_cubit.dart';
+import 'domain/add_store_cubit.dart';
 import 'domain/is_default_branch_location_cubit.dart';
+import 'domain/is_enabled_product_upload_cubit.dart';
 import 'domain/is_primary_address_cubit.dart';
+import 'domain/store_temp_list_cubit.dart';
 
 List<StoreTempData> totalStores(BuildContext context) =>
     context.watch<StoreTempListCubit>().state.data;
 AddStoreCubit editStore(BuildContext context) => context.read<AddStoreCubit>();
 void editAddData(BuildContext context) => context.read<AddDataCubit>();
-DataResponseNotifier stateManager(BuildContext context) {
-  final state = context.read<DataResponseNotifier>();
+PagedDataNotifier stateManager(BuildContext context) {
+  final state = context.read<PagedDataNotifier>();
   return state;
 }
 
-SingleDataResponseNotifier singleStateManager(BuildContext context) {
-  final state = context.read<SingleDataResponseNotifier>();
+SinglePagedDataNotifier singleStateManager(BuildContext context) {
+  final state = context.read<SinglePagedDataNotifier>();
   return state;
 }
 
@@ -232,8 +229,8 @@ class _AddContactState extends State<AddContact> {
                   height: 10,
                 ),
                 CircleAvatar(
-                  child: Image.asset('assets/images/boy_1.png'),
                   radius: 55,
+                  child: Image.asset('assets/images/boy_1.png'),
                 ),
                 const SizedBox(
                   height: 20,
@@ -354,7 +351,6 @@ class _AddContactState extends State<AddContact> {
                               accountTypeId = 2;
                             });
                           } else {
-                            print('newdb $db');
                             final newdb = prefs.getInt('accountTypeId');
                             int id = newdb!;
                             setState(() {
@@ -362,7 +358,6 @@ class _AddContactState extends State<AddContact> {
                             });
                             await prefs.setInt('accountTypeId', id + 1);
                           }
-                          print('db $db');
 
                           setState(() {
                             showLoading = true;
@@ -377,35 +372,39 @@ class _AddContactState extends State<AddContact> {
 
                           final data = context.read<AddDataCubit>().state;
 
-                          DataRepository(getRemoteService)
-                              .postData(data: data.toJson())
+                          context
+                              .read<SinglePagedDataNotifier>()
+                              .addData(data: data.toJson())
                               .then((value) {
                             if (value["statusCode"] == 200) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('Contact added')));
+                                  const SnackBar(
+                                      content: Text('Contact added')));
                             } else if (value["body"]
                                 .toString()
                                 .contains('Stores list must be unique')) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
+                                  const SnackBar(
                                       content:
                                           Text('Stores list must be unique')));
                             } else if (value["body"]
                                 .toString()
                                 .contains('LoginName, Mobile, Email')) {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                  content: Text(
-                                      'LoginName, mobile, email must be unique')));
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text(
+                                          'LoginName, mobile, email must be unique')));
                             } else if (value["body"]
                                 .toString()
                                 .contains('The Country field is required')) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
+                                  const SnackBar(
                                       content:
                                           Text('Country field is required')));
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('Unknown issue')));
+                                  const SnackBar(
+                                      content: Text('Unknown issue')));
                             }
                             setState(() {
                               showLoading = false;
@@ -414,21 +413,22 @@ class _AddContactState extends State<AddContact> {
                         }
                       },
                       child: showLoading
-                          ? SizedBox(
+                          ? const SizedBox(
                               width: 20,
                               height: 20,
                               child: CircularProgressIndicator(
                                 backgroundColor: Colors.white,
                               ),
                             )
-                          : Text('Create Contact')),
+                          : const Text('Create Contact')),
                 ),
-                Text(locationMessage),
                 Row(
                   children: [
                     ElevatedButton(
                         onPressed: () {
-                          stateManager(context).getDataResponse();
+                          stateManager(context).getPage(
+                            jsonDataSelector: (json) => json as List<dynamic>,
+                          );
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => const AllContacts(),
                           ));

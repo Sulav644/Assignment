@@ -1,14 +1,12 @@
-import 'package:assignment_app/assignment/contacts/add_contact_form/data/form_use_type.dart';
-import 'package:assignment_app/core/components/add_contact_view.dart';
+import 'package:xoomship/contacts/all_contacts/data/data_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../main.dart';
+import '../../../core/components/add_contact_view.dart';
 import '../../add_contact_form/add_contact.dart';
+import '../../add_contact_form/data/form_use_type.dart';
 import '../../single_contact/single_contact.dart';
 import '../all_contacts.dart';
-import '../data/data_repository.dart';
 
 class ActionButtons extends StatefulWidget {
   final int companyBasicId;
@@ -32,11 +30,11 @@ class _ActionButtonsState extends State<ActionButtons> {
       InkWell(
         child: IconButton(
             onPressed: () {
-              singleStateManager(context).getDataResponse(
+              singleStateManager(context).getPage(
                   companyBasicId: widget.companyBasicId,
                   loginId: widget.loginId);
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => AddContactView(
+                builder: (context) => const AddContactView(
                   formUseType: FormUseType.update(),
                 ),
               ));
@@ -65,8 +63,8 @@ class _ActionButtonsState extends State<ActionButtons> {
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
-                                        child: Text('NO')),
-                                    SizedBox(
+                                        child: const Text('NO')),
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     ElevatedButton(
@@ -78,14 +76,17 @@ class _ActionButtonsState extends State<ActionButtons> {
                                           setState(() {
                                             showLoading = true;
                                           });
-                                          DataRepository(getRemoteService)
+                                          context
+                                              .read<SinglePagedDataNotifier>()
                                               .deleteData(
                                                   companyBasicId:
                                                       widget.companyBasicId,
                                                   loginId: widget.loginId)
                                               .then((value) {
-                                            stateManager(context)
-                                                .getDataResponse();
+                                            stateManager(context).getPage(
+                                              jsonDataSelector: (json) =>
+                                                  json as List<dynamic>,
+                                            );
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(const SnackBar(
                                                     content: Text(
@@ -103,12 +104,12 @@ class _ActionButtonsState extends State<ActionButtons> {
                                           });
                                         },
                                         child: showLoading
-                                            ? SizedBox(
+                                            ? const SizedBox(
                                                 width: 20,
                                                 height: 20,
                                                 child:
                                                     CircularProgressIndicator())
-                                            : Text('YES'))
+                                            : const Text('YES'))
                                   ])
                             ],
                           ),
@@ -122,7 +123,7 @@ class _ActionButtonsState extends State<ActionButtons> {
       InkWell(
         child: IconButton(
             onPressed: () {
-              singleStateManager(context).getDataResponse(
+              singleStateManager(context).getPage(
                   companyBasicId: widget.companyBasicId,
                   loginId: widget.loginId);
               Navigator.of(context).pushReplacement(MaterialPageRoute(

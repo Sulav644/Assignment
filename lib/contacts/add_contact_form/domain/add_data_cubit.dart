@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../all_contacts/data/add_data.dart';
+import '../../all_contacts/data/models/add_data.dart';
 import 'add_data_const.dart';
 
 class AddDataCubit extends Cubit<AddData> {

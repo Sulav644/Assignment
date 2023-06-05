@@ -1,8 +1,8 @@
-import 'package:assignment_app/assignment/contacts/add_contact_form/domain/add_data_cubit.dart';
-import 'package:assignment_app/core/utils.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../core/utils.dart';
+import '../domain/add_data_cubit.dart';
 import '../domain/select_country_cubit.dart';
 
 class LocationFields extends StatelessWidget {

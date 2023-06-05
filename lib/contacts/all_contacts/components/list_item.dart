@@ -1,13 +1,9 @@
-import 'package:assignment_app/assignment/contacts/all_contacts/components/action_buttons.dart';
-import 'package:assignment_app/assignment/contacts/all_contacts/data/data_notifier.dart';
-import 'package:assignment_app/assignment/contacts/single_contact/single_contact.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils.dart';
-import '../../../../main.dart';
-import '../../add_contact_form/add_contact.dart';
 import '../all_contacts.dart';
-import '../data/data_repository.dart';
+import '../data/data_notifier.dart';
+import 'action_buttons.dart';
 
 class ListItem extends StatelessWidget {
   final int index;
@@ -17,7 +13,7 @@ class ListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final spc = Space(context: context);
-    final data = load.data.entity;
+    final data = load.data;
 
     return data.isEmpty
         ? SizedBox(

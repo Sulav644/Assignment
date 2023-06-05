@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../all_contacts/data/add_data.dart';
+import '../../all_contacts/data/models/add_data.dart';
 
 class StoreTempListCubit extends Cubit<StoreTempDataList> {
   StoreTempListCubit()
@@ -12,7 +12,6 @@ class StoreTempListCubit extends Cubit<StoreTempDataList> {
     List<StoreTempData> list = [...state.data, data];
 
     emit(state.copyWith(data: list));
-    print('list $state');
   }
 
   void editData({required int index, required String text}) {
@@ -24,9 +23,7 @@ class StoreTempListCubit extends Cubit<StoreTempDataList> {
       }
     }
     filteredList.insert(index, data);
-    print('data $data');
     emit(state.copyWith(data: filteredList));
-    print(state);
   }
 
   void deleteData() {

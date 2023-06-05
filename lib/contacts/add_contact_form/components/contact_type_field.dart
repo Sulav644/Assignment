@@ -1,6 +1,7 @@
-import 'package:assignment_app/assignment/contacts/all_contacts/all_contacts.dart';
-import 'package:assignment_app/core/utils.dart';
+import 'package:xoomship/contacts/all_contacts/all_contacts.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/utils.dart';
 
 class ContactType extends StatelessWidget {
   final int contactType;

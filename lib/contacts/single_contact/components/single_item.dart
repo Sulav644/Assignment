@@ -1,6 +1,7 @@
-import 'package:assignment_app/assignment/contacts/all_contacts/all_contacts.dart';
-import 'package:assignment_app/assignment/contacts/all_contacts/data/data_notifier.dart';
+import 'package:xoomship/contacts/all_contacts/all_contacts.dart';
 import 'package:flutter/material.dart';
+
+import '../../all_contacts/data/data_notifier.dart';
 
 class SingleItem extends StatelessWidget {
   final SinglePagedDataState load;
@@ -8,7 +9,7 @@ class SingleItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = load.data.entity;
+    final data = load.data;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,

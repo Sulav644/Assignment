@@ -1,6 +1,7 @@
-import 'package:assignment_app/assignment/contacts/all_contacts/all_contacts.dart';
-import 'package:assignment_app/core/utils.dart';
+import 'package:xoomship/contacts/all_contacts/all_contacts.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../../../core/utils.dart';
 
 class ToggleButton extends StatelessWidget {
   final String title;

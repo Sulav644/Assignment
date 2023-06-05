@@ -1,9 +1,8 @@
-import 'package:assignment_app/assignment/contacts/all_contacts/data/data_notifier.dart';
-import 'package:assignment_app/assignment/contacts/all_contacts/data/data_response_notifier.dart';
-import 'package:assignment_app/core/utils.dart';
+import 'package:xoomship/contacts/all_contacts/data/data_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../core/utils.dart';
 import 'components/list_item.dart';
 
 extension BoldText on String {
@@ -39,7 +38,7 @@ class AllContacts extends StatelessWidget {
     final cmp = Components();
     return Scaffold(
       appBar: cmp.appBar,
-      body: BlocBuilder<DataResponseNotifier, PagedDataState>(
+      body: BlocBuilder<PagedDataNotifier, PagedDataState>(
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 28.0),
@@ -70,8 +69,7 @@ class AllContacts extends StatelessWidget {
                     itemCount: state.map(
                       initial: (_) => 1,
                       loadInProgress: (_) => 1,
-                      loadSuccess: (_) =>
-                          _.data.entity.isEmpty ? 1 : _.data.entity.length,
+                      loadSuccess: (_) => _.data.isEmpty ? 1 : _.data.length,
                       loadFailure: (_) => 0,
                     ),
                     itemBuilder: (context, index) {

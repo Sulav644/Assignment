@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/components/profile_banner_left.dart';
 import '../core/utils.dart';
+import '../sign_up/phone_number_send_screen.dart';
 import 'components/bottom_navigation.dart';
 import 'components/connect_apps.dart';
 import 'components/divider_line.dart';
@@ -20,7 +21,13 @@ class ProfilePage extends StatelessWidget {
               width: spc.wdRat(1),
               child: Column(children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) {
+                        return PhoneNumberSendScreen();
+                      },
+                    ));
+                  },
                   child: ProfilePic(
                     imgPath: imgPath,
                   ),
@@ -87,7 +94,6 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ]))),
-      bottomNavigationBar: const BottomNavigation(),
     );
   }
 }

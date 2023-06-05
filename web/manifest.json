@@ -1,6 +1,6 @@
 {
-    "name": "assignment_project",
-    "short_name": "assignment_project",
+    "name": "xoomship",
+    "short_name": "xoomship",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

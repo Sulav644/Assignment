@@ -16,29 +16,29 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PagedDataState {
-  Fresh<List<Data>> get data => throw _privateConstructorUsedError;
+  List<Data> get data => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Fresh<List<Data>> data) initial,
-    required TResult Function(Fresh<List<Data>> data) loadInProgress,
-    required TResult Function(Fresh<List<Data>> data) loadSuccess,
-    required TResult Function(Fresh<List<Data>> data) loadFailure,
+    required TResult Function(List<Data> data) initial,
+    required TResult Function(List<Data> data) loadInProgress,
+    required TResult Function(List<Data> data) loadSuccess,
+    required TResult Function(List<Data> data) loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Fresh<List<Data>> data)? initial,
-    TResult? Function(Fresh<List<Data>> data)? loadInProgress,
-    TResult? Function(Fresh<List<Data>> data)? loadSuccess,
-    TResult? Function(Fresh<List<Data>> data)? loadFailure,
+    TResult? Function(List<Data> data)? initial,
+    TResult? Function(List<Data> data)? loadInProgress,
+    TResult? Function(List<Data> data)? loadSuccess,
+    TResult? Function(List<Data> data)? loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Fresh<List<Data>> data)? initial,
-    TResult Function(Fresh<List<Data>> data)? loadInProgress,
-    TResult Function(Fresh<List<Data>> data)? loadSuccess,
-    TResult Function(Fresh<List<Data>> data)? loadFailure,
+    TResult Function(List<Data> data)? initial,
+    TResult Function(List<Data> data)? loadInProgress,
+    TResult Function(List<Data> data)? loadSuccess,
+    TResult Function(List<Data> data)? loadFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -79,9 +79,7 @@ abstract class $PagedDataStateCopyWith<$Res> {
           PagedDataState value, $Res Function(PagedDataState) then) =
       _$PagedDataStateCopyWithImpl<$Res, PagedDataState>;
   @useResult
-  $Res call({Fresh<List<Data>> data});
-
-  $FreshCopyWith<List<Data>, $Res> get data;
+  $Res call({List<Data> data});
 }
 
 /// @nodoc
@@ -103,16 +101,8 @@ class _$PagedDataStateCopyWithImpl<$Res, $Val extends PagedDataState>
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Fresh<List<Data>>,
+              as List<Data>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $FreshCopyWith<List<Data>, $Res> get data {
-    return $FreshCopyWith<List<Data>, $Res>(_value.data, (value) {
-      return _then(_value.copyWith(data: value) as $Val);
-    });
   }
 }
 
@@ -124,10 +114,7 @@ abstract class _$$_InitialCopyWith<$Res>
       __$$_InitialCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Fresh<List<Data>> data});
-
-  @override
-  $FreshCopyWith<List<Data>, $Res> get data;
+  $Res call({List<Data> data});
 }
 
 /// @nodoc
@@ -144,9 +131,9 @@ class __$$_InitialCopyWithImpl<$Res>
   }) {
     return _then(_$_Initial(
       null == data
-          ? _value.data
+          ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as Fresh<List<Data>>,
+              as List<Data>,
     ));
   }
 }
@@ -154,10 +141,17 @@ class __$$_InitialCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Initial extends _Initial {
-  const _$_Initial(this.data) : super._();
+  const _$_Initial(final List<Data> data)
+      : _data = data,
+        super._();
 
+  final List<Data> _data;
   @override
-  final Fresh<List<Data>> data;
+  List<Data> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
 
   @override
   String toString() {
@@ -169,11 +163,12 @@ class _$_Initial extends _Initial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Initial &&
-            (identical(other.data, data) || other.data == data));
+            const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, data);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
   @override
@@ -184,10 +179,10 @@ class _$_Initial extends _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Fresh<List<Data>> data) initial,
-    required TResult Function(Fresh<List<Data>> data) loadInProgress,
-    required TResult Function(Fresh<List<Data>> data) loadSuccess,
-    required TResult Function(Fresh<List<Data>> data) loadFailure,
+    required TResult Function(List<Data> data) initial,
+    required TResult Function(List<Data> data) loadInProgress,
+    required TResult Function(List<Data> data) loadSuccess,
+    required TResult Function(List<Data> data) loadFailure,
   }) {
     return initial(data);
   }
@@ -195,10 +190,10 @@ class _$_Initial extends _Initial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Fresh<List<Data>> data)? initial,
-    TResult? Function(Fresh<List<Data>> data)? loadInProgress,
-    TResult? Function(Fresh<List<Data>> data)? loadSuccess,
-    TResult? Function(Fresh<List<Data>> data)? loadFailure,
+    TResult? Function(List<Data> data)? initial,
+    TResult? Function(List<Data> data)? loadInProgress,
+    TResult? Function(List<Data> data)? loadSuccess,
+    TResult? Function(List<Data> data)? loadFailure,
   }) {
     return initial?.call(data);
   }
@@ -206,10 +201,10 @@ class _$_Initial extends _Initial {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Fresh<List<Data>> data)? initial,
-    TResult Function(Fresh<List<Data>> data)? loadInProgress,
-    TResult Function(Fresh<List<Data>> data)? loadSuccess,
-    TResult Function(Fresh<List<Data>> data)? loadFailure,
+    TResult Function(List<Data> data)? initial,
+    TResult Function(List<Data> data)? loadInProgress,
+    TResult Function(List<Data> data)? loadSuccess,
+    TResult Function(List<Data> data)? loadFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -257,11 +252,11 @@ class _$_Initial extends _Initial {
 }
 
 abstract class _Initial extends PagedDataState {
-  const factory _Initial(final Fresh<List<Data>> data) = _$_Initial;
+  const factory _Initial(final List<Data> data) = _$_Initial;
   const _Initial._() : super._();
 
   @override
-  Fresh<List<Data>> get data;
+  List<Data> get data;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>
@@ -276,10 +271,7 @@ abstract class _$$_LoadInProgressCopyWith<$Res>
       __$$_LoadInProgressCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Fresh<List<Data>> data});
-
-  @override
-  $FreshCopyWith<List<Data>, $Res> get data;
+  $Res call({List<Data> data});
 }
 
 /// @nodoc
@@ -297,9 +289,9 @@ class __$$_LoadInProgressCopyWithImpl<$Res>
   }) {
     return _then(_$_LoadInProgress(
       null == data
-          ? _value.data
+          ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as Fresh<List<Data>>,
+              as List<Data>,
     ));
   }
 }
@@ -307,10 +299,17 @@ class __$$_LoadInProgressCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoadInProgress extends _LoadInProgress {
-  const _$_LoadInProgress(this.data) : super._();
+  const _$_LoadInProgress(final List<Data> data)
+      : _data = data,
+        super._();
 
+  final List<Data> _data;
   @override
-  final Fresh<List<Data>> data;
+  List<Data> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
 
   @override
   String toString() {
@@ -322,11 +321,12 @@ class _$_LoadInProgress extends _LoadInProgress {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoadInProgress &&
-            (identical(other.data, data) || other.data == data));
+            const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, data);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
   @override
@@ -337,10 +337,10 @@ class _$_LoadInProgress extends _LoadInProgress {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Fresh<List<Data>> data) initial,
-    required TResult Function(Fresh<List<Data>> data) loadInProgress,
-    required TResult Function(Fresh<List<Data>> data) loadSuccess,
-    required TResult Function(Fresh<List<Data>> data) loadFailure,
+    required TResult Function(List<Data> data) initial,
+    required TResult Function(List<Data> data) loadInProgress,
+    required TResult Function(List<Data> data) loadSuccess,
+    required TResult Function(List<Data> data) loadFailure,
   }) {
     return loadInProgress(data);
   }
@@ -348,10 +348,10 @@ class _$_LoadInProgress extends _LoadInProgress {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Fresh<List<Data>> data)? initial,
-    TResult? Function(Fresh<List<Data>> data)? loadInProgress,
-    TResult? Function(Fresh<List<Data>> data)? loadSuccess,
-    TResult? Function(Fresh<List<Data>> data)? loadFailure,
+    TResult? Function(List<Data> data)? initial,
+    TResult? Function(List<Data> data)? loadInProgress,
+    TResult? Function(List<Data> data)? loadSuccess,
+    TResult? Function(List<Data> data)? loadFailure,
   }) {
     return loadInProgress?.call(data);
   }
@@ -359,10 +359,10 @@ class _$_LoadInProgress extends _LoadInProgress {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Fresh<List<Data>> data)? initial,
-    TResult Function(Fresh<List<Data>> data)? loadInProgress,
-    TResult Function(Fresh<List<Data>> data)? loadSuccess,
-    TResult Function(Fresh<List<Data>> data)? loadFailure,
+    TResult Function(List<Data> data)? initial,
+    TResult Function(List<Data> data)? loadInProgress,
+    TResult Function(List<Data> data)? loadSuccess,
+    TResult Function(List<Data> data)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
@@ -410,12 +410,11 @@ class _$_LoadInProgress extends _LoadInProgress {
 }
 
 abstract class _LoadInProgress extends PagedDataState {
-  const factory _LoadInProgress(final Fresh<List<Data>> data) =
-      _$_LoadInProgress;
+  const factory _LoadInProgress(final List<Data> data) = _$_LoadInProgress;
   const _LoadInProgress._() : super._();
 
   @override
-  Fresh<List<Data>> get data;
+  List<Data> get data;
   @override
   @JsonKey(ignore: true)
   _$$_LoadInProgressCopyWith<_$_LoadInProgress> get copyWith =>
@@ -430,10 +429,7 @@ abstract class _$$_LoadSuccessCopyWith<$Res>
       __$$_LoadSuccessCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Fresh<List<Data>> data});
-
-  @override
-  $FreshCopyWith<List<Data>, $Res> get data;
+  $Res call({List<Data> data});
 }
 
 /// @nodoc
@@ -451,9 +447,9 @@ class __$$_LoadSuccessCopyWithImpl<$Res>
   }) {
     return _then(_$_LoadSuccess(
       null == data
-          ? _value.data
+          ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as Fresh<List<Data>>,
+              as List<Data>,
     ));
   }
 }
@@ -461,10 +457,17 @@ class __$$_LoadSuccessCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoadSuccess extends _LoadSuccess {
-  const _$_LoadSuccess(this.data) : super._();
+  const _$_LoadSuccess(final List<Data> data)
+      : _data = data,
+        super._();
 
+  final List<Data> _data;
   @override
-  final Fresh<List<Data>> data;
+  List<Data> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
 
   @override
   String toString() {
@@ -476,11 +479,12 @@ class _$_LoadSuccess extends _LoadSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoadSuccess &&
-            (identical(other.data, data) || other.data == data));
+            const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, data);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
   @override
@@ -491,10 +495,10 @@ class _$_LoadSuccess extends _LoadSuccess {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Fresh<List<Data>> data) initial,
-    required TResult Function(Fresh<List<Data>> data) loadInProgress,
-    required TResult Function(Fresh<List<Data>> data) loadSuccess,
-    required TResult Function(Fresh<List<Data>> data) loadFailure,
+    required TResult Function(List<Data> data) initial,
+    required TResult Function(List<Data> data) loadInProgress,
+    required TResult Function(List<Data> data) loadSuccess,
+    required TResult Function(List<Data> data) loadFailure,
   }) {
     return loadSuccess(data);
   }
@@ -502,10 +506,10 @@ class _$_LoadSuccess extends _LoadSuccess {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Fresh<List<Data>> data)? initial,
-    TResult? Function(Fresh<List<Data>> data)? loadInProgress,
-    TResult? Function(Fresh<List<Data>> data)? loadSuccess,
-    TResult? Function(Fresh<List<Data>> data)? loadFailure,
+    TResult? Function(List<Data> data)? initial,
+    TResult? Function(List<Data> data)? loadInProgress,
+    TResult? Function(List<Data> data)? loadSuccess,
+    TResult? Function(List<Data> data)? loadFailure,
   }) {
     return loadSuccess?.call(data);
   }
@@ -513,10 +517,10 @@ class _$_LoadSuccess extends _LoadSuccess {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Fresh<List<Data>> data)? initial,
-    TResult Function(Fresh<List<Data>> data)? loadInProgress,
-    TResult Function(Fresh<List<Data>> data)? loadSuccess,
-    TResult Function(Fresh<List<Data>> data)? loadFailure,
+    TResult Function(List<Data> data)? initial,
+    TResult Function(List<Data> data)? loadInProgress,
+    TResult Function(List<Data> data)? loadSuccess,
+    TResult Function(List<Data> data)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
@@ -564,11 +568,11 @@ class _$_LoadSuccess extends _LoadSuccess {
 }
 
 abstract class _LoadSuccess extends PagedDataState {
-  const factory _LoadSuccess(final Fresh<List<Data>> data) = _$_LoadSuccess;
+  const factory _LoadSuccess(final List<Data> data) = _$_LoadSuccess;
   const _LoadSuccess._() : super._();
 
   @override
-  Fresh<List<Data>> get data;
+  List<Data> get data;
   @override
   @JsonKey(ignore: true)
   _$$_LoadSuccessCopyWith<_$_LoadSuccess> get copyWith =>
@@ -583,10 +587,7 @@ abstract class _$$_LoadFailureCopyWith<$Res>
       __$$_LoadFailureCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Fresh<List<Data>> data});
-
-  @override
-  $FreshCopyWith<List<Data>, $Res> get data;
+  $Res call({List<Data> data});
 }
 
 /// @nodoc
@@ -604,9 +605,9 @@ class __$$_LoadFailureCopyWithImpl<$Res>
   }) {
     return _then(_$_LoadFailure(
       null == data
-          ? _value.data
+          ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as Fresh<List<Data>>,
+              as List<Data>,
     ));
   }
 }
@@ -614,10 +615,17 @@ class __$$_LoadFailureCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoadFailure extends _LoadFailure {
-  const _$_LoadFailure(this.data) : super._();
+  const _$_LoadFailure(final List<Data> data)
+      : _data = data,
+        super._();
 
+  final List<Data> _data;
   @override
-  final Fresh<List<Data>> data;
+  List<Data> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
 
   @override
   String toString() {
@@ -629,11 +637,12 @@ class _$_LoadFailure extends _LoadFailure {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoadFailure &&
-            (identical(other.data, data) || other.data == data));
+            const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, data);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
   @override
@@ -644,10 +653,10 @@ class _$_LoadFailure extends _LoadFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Fresh<List<Data>> data) initial,
-    required TResult Function(Fresh<List<Data>> data) loadInProgress,
-    required TResult Function(Fresh<List<Data>> data) loadSuccess,
-    required TResult Function(Fresh<List<Data>> data) loadFailure,
+    required TResult Function(List<Data> data) initial,
+    required TResult Function(List<Data> data) loadInProgress,
+    required TResult Function(List<Data> data) loadSuccess,
+    required TResult Function(List<Data> data) loadFailure,
   }) {
     return loadFailure(data);
   }
@@ -655,10 +664,10 @@ class _$_LoadFailure extends _LoadFailure {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Fresh<List<Data>> data)? initial,
-    TResult? Function(Fresh<List<Data>> data)? loadInProgress,
-    TResult? Function(Fresh<List<Data>> data)? loadSuccess,
-    TResult? Function(Fresh<List<Data>> data)? loadFailure,
+    TResult? Function(List<Data> data)? initial,
+    TResult? Function(List<Data> data)? loadInProgress,
+    TResult? Function(List<Data> data)? loadSuccess,
+    TResult? Function(List<Data> data)? loadFailure,
   }) {
     return loadFailure?.call(data);
   }
@@ -666,10 +675,10 @@ class _$_LoadFailure extends _LoadFailure {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Fresh<List<Data>> data)? initial,
-    TResult Function(Fresh<List<Data>> data)? loadInProgress,
-    TResult Function(Fresh<List<Data>> data)? loadSuccess,
-    TResult Function(Fresh<List<Data>> data)? loadFailure,
+    TResult Function(List<Data> data)? initial,
+    TResult Function(List<Data> data)? loadInProgress,
+    TResult Function(List<Data> data)? loadSuccess,
+    TResult Function(List<Data> data)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadFailure != null) {
@@ -717,11 +726,11 @@ class _$_LoadFailure extends _LoadFailure {
 }
 
 abstract class _LoadFailure extends PagedDataState {
-  const factory _LoadFailure(final Fresh<List<Data>> data) = _$_LoadFailure;
+  const factory _LoadFailure(final List<Data> data) = _$_LoadFailure;
   const _LoadFailure._() : super._();
 
   @override
-  Fresh<List<Data>> get data;
+  List<Data> get data;
   @override
   @JsonKey(ignore: true)
   _$$_LoadFailureCopyWith<_$_LoadFailure> get copyWith =>
@@ -730,29 +739,29 @@ abstract class _LoadFailure extends PagedDataState {
 
 /// @nodoc
 mixin _$SinglePagedDataState {
-  Fresh<Data> get data => throw _privateConstructorUsedError;
+  Data get data => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Fresh<Data> data) initial,
-    required TResult Function(Fresh<Data> data) loadInProgress,
-    required TResult Function(Fresh<Data> data) loadSuccess,
-    required TResult Function(Fresh<Data> data) loadFailure,
+    required TResult Function(Data data) initial,
+    required TResult Function(Data data) loadInProgress,
+    required TResult Function(Data data) loadSuccess,
+    required TResult Function(Data data) loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Fresh<Data> data)? initial,
-    TResult? Function(Fresh<Data> data)? loadInProgress,
-    TResult? Function(Fresh<Data> data)? loadSuccess,
-    TResult? Function(Fresh<Data> data)? loadFailure,
+    TResult? Function(Data data)? initial,
+    TResult? Function(Data data)? loadInProgress,
+    TResult? Function(Data data)? loadSuccess,
+    TResult? Function(Data data)? loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Fresh<Data> data)? initial,
-    TResult Function(Fresh<Data> data)? loadInProgress,
-    TResult Function(Fresh<Data> data)? loadSuccess,
-    TResult Function(Fresh<Data> data)? loadFailure,
+    TResult Function(Data data)? initial,
+    TResult Function(Data data)? loadInProgress,
+    TResult Function(Data data)? loadSuccess,
+    TResult Function(Data data)? loadFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -793,9 +802,9 @@ abstract class $SinglePagedDataStateCopyWith<$Res> {
           $Res Function(SinglePagedDataState) then) =
       _$SinglePagedDataStateCopyWithImpl<$Res, SinglePagedDataState>;
   @useResult
-  $Res call({Fresh<Data> data});
+  $Res call({Data data});
 
-  $FreshCopyWith<Data, $Res> get data;
+  $DataCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -818,14 +827,14 @@ class _$SinglePagedDataStateCopyWithImpl<$Res,
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Fresh<Data>,
+              as Data,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $FreshCopyWith<Data, $Res> get data {
-    return $FreshCopyWith<Data, $Res>(_value.data, (value) {
+  $DataCopyWith<$Res> get data {
+    return $DataCopyWith<$Res>(_value.data, (value) {
       return _then(_value.copyWith(data: value) as $Val);
     });
   }
@@ -839,10 +848,10 @@ abstract class _$$_SingleInitialCopyWith<$Res>
       __$$_SingleInitialCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Fresh<Data> data});
+  $Res call({Data data});
 
   @override
-  $FreshCopyWith<Data, $Res> get data;
+  $DataCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -862,7 +871,7 @@ class __$$_SingleInitialCopyWithImpl<$Res>
       null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Fresh<Data>,
+              as Data,
     ));
   }
 }
@@ -873,7 +882,7 @@ class _$_SingleInitial extends _SingleInitial {
   const _$_SingleInitial(this.data) : super._();
 
   @override
-  final Fresh<Data> data;
+  final Data data;
 
   @override
   String toString() {
@@ -900,10 +909,10 @@ class _$_SingleInitial extends _SingleInitial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Fresh<Data> data) initial,
-    required TResult Function(Fresh<Data> data) loadInProgress,
-    required TResult Function(Fresh<Data> data) loadSuccess,
-    required TResult Function(Fresh<Data> data) loadFailure,
+    required TResult Function(Data data) initial,
+    required TResult Function(Data data) loadInProgress,
+    required TResult Function(Data data) loadSuccess,
+    required TResult Function(Data data) loadFailure,
   }) {
     return initial(data);
   }
@@ -911,10 +920,10 @@ class _$_SingleInitial extends _SingleInitial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Fresh<Data> data)? initial,
-    TResult? Function(Fresh<Data> data)? loadInProgress,
-    TResult? Function(Fresh<Data> data)? loadSuccess,
-    TResult? Function(Fresh<Data> data)? loadFailure,
+    TResult? Function(Data data)? initial,
+    TResult? Function(Data data)? loadInProgress,
+    TResult? Function(Data data)? loadSuccess,
+    TResult? Function(Data data)? loadFailure,
   }) {
     return initial?.call(data);
   }
@@ -922,10 +931,10 @@ class _$_SingleInitial extends _SingleInitial {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Fresh<Data> data)? initial,
-    TResult Function(Fresh<Data> data)? loadInProgress,
-    TResult Function(Fresh<Data> data)? loadSuccess,
-    TResult Function(Fresh<Data> data)? loadFailure,
+    TResult Function(Data data)? initial,
+    TResult Function(Data data)? loadInProgress,
+    TResult Function(Data data)? loadSuccess,
+    TResult Function(Data data)? loadFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -973,11 +982,11 @@ class _$_SingleInitial extends _SingleInitial {
 }
 
 abstract class _SingleInitial extends SinglePagedDataState {
-  const factory _SingleInitial(final Fresh<Data> data) = _$_SingleInitial;
+  const factory _SingleInitial(final Data data) = _$_SingleInitial;
   const _SingleInitial._() : super._();
 
   @override
-  Fresh<Data> get data;
+  Data get data;
   @override
   @JsonKey(ignore: true)
   _$$_SingleInitialCopyWith<_$_SingleInitial> get copyWith =>
@@ -992,10 +1001,10 @@ abstract class _$$_SingleLoadInProgressCopyWith<$Res>
       __$$_SingleLoadInProgressCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Fresh<Data> data});
+  $Res call({Data data});
 
   @override
-  $FreshCopyWith<Data, $Res> get data;
+  $DataCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -1015,7 +1024,7 @@ class __$$_SingleLoadInProgressCopyWithImpl<$Res>
       null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Fresh<Data>,
+              as Data,
     ));
   }
 }
@@ -1026,7 +1035,7 @@ class _$_SingleLoadInProgress extends _SingleLoadInProgress {
   const _$_SingleLoadInProgress(this.data) : super._();
 
   @override
-  final Fresh<Data> data;
+  final Data data;
 
   @override
   String toString() {
@@ -1054,10 +1063,10 @@ class _$_SingleLoadInProgress extends _SingleLoadInProgress {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Fresh<Data> data) initial,
-    required TResult Function(Fresh<Data> data) loadInProgress,
-    required TResult Function(Fresh<Data> data) loadSuccess,
-    required TResult Function(Fresh<Data> data) loadFailure,
+    required TResult Function(Data data) initial,
+    required TResult Function(Data data) loadInProgress,
+    required TResult Function(Data data) loadSuccess,
+    required TResult Function(Data data) loadFailure,
   }) {
     return loadInProgress(data);
   }
@@ -1065,10 +1074,10 @@ class _$_SingleLoadInProgress extends _SingleLoadInProgress {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Fresh<Data> data)? initial,
-    TResult? Function(Fresh<Data> data)? loadInProgress,
-    TResult? Function(Fresh<Data> data)? loadSuccess,
-    TResult? Function(Fresh<Data> data)? loadFailure,
+    TResult? Function(Data data)? initial,
+    TResult? Function(Data data)? loadInProgress,
+    TResult? Function(Data data)? loadSuccess,
+    TResult? Function(Data data)? loadFailure,
   }) {
     return loadInProgress?.call(data);
   }
@@ -1076,10 +1085,10 @@ class _$_SingleLoadInProgress extends _SingleLoadInProgress {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Fresh<Data> data)? initial,
-    TResult Function(Fresh<Data> data)? loadInProgress,
-    TResult Function(Fresh<Data> data)? loadSuccess,
-    TResult Function(Fresh<Data> data)? loadFailure,
+    TResult Function(Data data)? initial,
+    TResult Function(Data data)? loadInProgress,
+    TResult Function(Data data)? loadSuccess,
+    TResult Function(Data data)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
@@ -1127,12 +1136,12 @@ class _$_SingleLoadInProgress extends _SingleLoadInProgress {
 }
 
 abstract class _SingleLoadInProgress extends SinglePagedDataState {
-  const factory _SingleLoadInProgress(final Fresh<Data> data) =
+  const factory _SingleLoadInProgress(final Data data) =
       _$_SingleLoadInProgress;
   const _SingleLoadInProgress._() : super._();
 
   @override
-  Fresh<Data> get data;
+  Data get data;
   @override
   @JsonKey(ignore: true)
   _$$_SingleLoadInProgressCopyWith<_$_SingleLoadInProgress> get copyWith =>
@@ -1147,10 +1156,10 @@ abstract class _$$_SingleLoadSuccessCopyWith<$Res>
       __$$_SingleLoadSuccessCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Fresh<Data> data});
+  $Res call({Data data});
 
   @override
-  $FreshCopyWith<Data, $Res> get data;
+  $DataCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -1170,7 +1179,7 @@ class __$$_SingleLoadSuccessCopyWithImpl<$Res>
       null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Fresh<Data>,
+              as Data,
     ));
   }
 }
@@ -1181,7 +1190,7 @@ class _$_SingleLoadSuccess extends _SingleLoadSuccess {
   const _$_SingleLoadSuccess(this.data) : super._();
 
   @override
-  final Fresh<Data> data;
+  final Data data;
 
   @override
   String toString() {
@@ -1209,10 +1218,10 @@ class _$_SingleLoadSuccess extends _SingleLoadSuccess {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Fresh<Data> data) initial,
-    required TResult Function(Fresh<Data> data) loadInProgress,
-    required TResult Function(Fresh<Data> data) loadSuccess,
-    required TResult Function(Fresh<Data> data) loadFailure,
+    required TResult Function(Data data) initial,
+    required TResult Function(Data data) loadInProgress,
+    required TResult Function(Data data) loadSuccess,
+    required TResult Function(Data data) loadFailure,
   }) {
     return loadSuccess(data);
   }
@@ -1220,10 +1229,10 @@ class _$_SingleLoadSuccess extends _SingleLoadSuccess {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Fresh<Data> data)? initial,
-    TResult? Function(Fresh<Data> data)? loadInProgress,
-    TResult? Function(Fresh<Data> data)? loadSuccess,
-    TResult? Function(Fresh<Data> data)? loadFailure,
+    TResult? Function(Data data)? initial,
+    TResult? Function(Data data)? loadInProgress,
+    TResult? Function(Data data)? loadSuccess,
+    TResult? Function(Data data)? loadFailure,
   }) {
     return loadSuccess?.call(data);
   }
@@ -1231,10 +1240,10 @@ class _$_SingleLoadSuccess extends _SingleLoadSuccess {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Fresh<Data> data)? initial,
-    TResult Function(Fresh<Data> data)? loadInProgress,
-    TResult Function(Fresh<Data> data)? loadSuccess,
-    TResult Function(Fresh<Data> data)? loadFailure,
+    TResult Function(Data data)? initial,
+    TResult Function(Data data)? loadInProgress,
+    TResult Function(Data data)? loadSuccess,
+    TResult Function(Data data)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
@@ -1282,12 +1291,11 @@ class _$_SingleLoadSuccess extends _SingleLoadSuccess {
 }
 
 abstract class _SingleLoadSuccess extends SinglePagedDataState {
-  const factory _SingleLoadSuccess(final Fresh<Data> data) =
-      _$_SingleLoadSuccess;
+  const factory _SingleLoadSuccess(final Data data) = _$_SingleLoadSuccess;
   const _SingleLoadSuccess._() : super._();
 
   @override
-  Fresh<Data> get data;
+  Data get data;
   @override
   @JsonKey(ignore: true)
   _$$_SingleLoadSuccessCopyWith<_$_SingleLoadSuccess> get copyWith =>
@@ -1302,10 +1310,10 @@ abstract class _$$_SingleLoadFailureCopyWith<$Res>
       __$$_SingleLoadFailureCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Fresh<Data> data});
+  $Res call({Data data});
 
   @override
-  $FreshCopyWith<Data, $Res> get data;
+  $DataCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -1325,7 +1333,7 @@ class __$$_SingleLoadFailureCopyWithImpl<$Res>
       null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Fresh<Data>,
+              as Data,
     ));
   }
 }
@@ -1336,7 +1344,7 @@ class _$_SingleLoadFailure extends _SingleLoadFailure {
   const _$_SingleLoadFailure(this.data) : super._();
 
   @override
-  final Fresh<Data> data;
+  final Data data;
 
   @override
   String toString() {
@@ -1364,10 +1372,10 @@ class _$_SingleLoadFailure extends _SingleLoadFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Fresh<Data> data) initial,
-    required TResult Function(Fresh<Data> data) loadInProgress,
-    required TResult Function(Fresh<Data> data) loadSuccess,
-    required TResult Function(Fresh<Data> data) loadFailure,
+    required TResult Function(Data data) initial,
+    required TResult Function(Data data) loadInProgress,
+    required TResult Function(Data data) loadSuccess,
+    required TResult Function(Data data) loadFailure,
   }) {
     return loadFailure(data);
   }
@@ -1375,10 +1383,10 @@ class _$_SingleLoadFailure extends _SingleLoadFailure {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Fresh<Data> data)? initial,
-    TResult? Function(Fresh<Data> data)? loadInProgress,
-    TResult? Function(Fresh<Data> data)? loadSuccess,
-    TResult? Function(Fresh<Data> data)? loadFailure,
+    TResult? Function(Data data)? initial,
+    TResult? Function(Data data)? loadInProgress,
+    TResult? Function(Data data)? loadSuccess,
+    TResult? Function(Data data)? loadFailure,
   }) {
     return loadFailure?.call(data);
   }
@@ -1386,10 +1394,10 @@ class _$_SingleLoadFailure extends _SingleLoadFailure {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Fresh<Data> data)? initial,
-    TResult Function(Fresh<Data> data)? loadInProgress,
-    TResult Function(Fresh<Data> data)? loadSuccess,
-    TResult Function(Fresh<Data> data)? loadFailure,
+    TResult Function(Data data)? initial,
+    TResult Function(Data data)? loadInProgress,
+    TResult Function(Data data)? loadSuccess,
+    TResult Function(Data data)? loadFailure,
     required TResult orElse(),
   }) {
     if (loadFailure != null) {
@@ -1437,12 +1445,11 @@ class _$_SingleLoadFailure extends _SingleLoadFailure {
 }
 
 abstract class _SingleLoadFailure extends SinglePagedDataState {
-  const factory _SingleLoadFailure(final Fresh<Data> data) =
-      _$_SingleLoadFailure;
+  const factory _SingleLoadFailure(final Data data) = _$_SingleLoadFailure;
   const _SingleLoadFailure._() : super._();
 
   @override
-  Fresh<Data> get data;
+  Data get data;
   @override
   @JsonKey(ignore: true)
   _$$_SingleLoadFailureCopyWith<_$_SingleLoadFailure> get copyWith =>

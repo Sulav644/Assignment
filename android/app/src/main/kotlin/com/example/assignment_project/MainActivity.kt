@@ -1,4 +1,4 @@
-package com.example.assignment_project
+package com.example.xoomship
 
 import io.flutter.embedding.android.FlutterActivity
 

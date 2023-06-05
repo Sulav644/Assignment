@@ -1,10 +1,9 @@
-import 'package:assignment_app/assignment/contacts/all_contacts/all_contacts.dart';
-import 'package:assignment_app/core/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../core/utils.dart';
 import '../add_contact_form/add_contact.dart';
+import '../all_contacts/all_contacts.dart';
 import '../all_contacts/data/data_notifier.dart';
-import '../all_contacts/data/data_response_notifier.dart';
 import 'components/single_item.dart';
 
 class SingleContact extends StatelessWidget {
@@ -17,7 +16,9 @@ class SingleContact extends StatelessWidget {
     final cmp = Components();
     return WillPopScope(
       onWillPop: () async {
-        stateManager(context).getDataResponse();
+        stateManager(context).getPage(
+          jsonDataSelector: (json) => json as List<dynamic>,
+        );
         Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => const AllContacts(),
         ));
@@ -25,7 +26,7 @@ class SingleContact extends StatelessWidget {
       },
       child: Scaffold(
         appBar: cmp.appBar,
-        body: BlocBuilder<SingleDataResponseNotifier, SinglePagedDataState>(
+        body: BlocBuilder<SinglePagedDataNotifier, SinglePagedDataState>(
           builder: (context, state) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 28.0),

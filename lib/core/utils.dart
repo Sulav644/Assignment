@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Space {
   final BuildContext context;
@@ -9,8 +10,10 @@ class Space {
 
 class Components {
   final appBar = AppBar(
+    elevation: 0,
     toolbarHeight: 0,
     backgroundColor: Colors.white,
-    elevation: 0,
+    systemOverlayStyle:
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent),
   );
 }
