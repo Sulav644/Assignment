@@ -54,10 +54,11 @@ class _DashBoardState extends State<DashBoard> {
       Placemark place = placemarks[0];
       print('place ${placemarks[0]}');
       context.read<LocationDetailsCubit>().setDetails(
-          address: place.administrativeArea!,
-          area: place.street!,
+          address: place.street!,
+          area: place.subAdministrativeArea!,
+          stateName: place.administrativeArea!,
           landmark: place.thoroughfare!,
-          city: place.subAdministrativeArea!,
+          city: place.locality!,
           zipCode: place.postalCode!,
           country: place.country!);
       setState(() {
@@ -156,87 +157,186 @@ class _DashBoardState extends State<DashBoard> {
     final cmp = Components();
     final floatingIconState = context.watch<ConfirmedPickupCubit>().state;
     return Scaffold(
-      appBar: cmp.appBar,
+      appBar: AppBar(
+        elevation: 0,
+        toolbarHeight: 0,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          // Status bar color
+          statusBarColor: Color.fromARGB(255, 3, 93, 158),
+
+          // Status bar brightness (optional)
+          statusBarIconBrightness: Brightness.light, // For Android (dark icons)
+          statusBarBrightness: Brightness.light, // For iOS (dark icons)
+        ),
+      ),
       backgroundColor: Colors.white,
       body: Stack(
         children: [
           SingleChildScrollView(
             controller: scrollController,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: spc.wdRat(0.06)),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: const ProfileHeader(),
-                  ),
-                  const SizedBox(
-                    height: 18,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: spc.wdRat(0.6),
-                          child: const Text(
-                            "Hey, Emmy Yost, let's dive into the details.🙌",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                                height: 1.4),
-                          ),
-                        ),
-                      ],
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 3, 93, 158),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(0),
+                          topRight: Radius.circular(0),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10))),
+                  child: Column(children: [
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: spc.wdRat(0.07)),
+                      child: const ProfileHeader(),
                     ),
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  CarouselSlider(
-                    options: CarouselOptions(height: 175.0),
-                    items: [
-                      'assets/images/banner.jpg',
-                      'assets/images/banner2.png',
-                      'assets/images/banner3.png',
-                      'assets/images/banner4.png'
-                    ].map((i) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Padding(
-                            padding: const EdgeInsets.all(6.0),
-                            child: Container(
-                              height: 190,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Color.fromARGB(
-                                              255, 160, 160, 160),
-                                          blurRadius: 12,
-                                          offset: Offset(0, 6)),
-                                    ]),
-                                child: Image.asset(
-                                  i,
+                    SizedBox(
+                      height: spc.hghtRat(0.05),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: spc.wdRat(0.07)),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: spc.wdRat(0.6),
+                            child: const Text(
+                              "Hey, Emmy Yost, let's dive into the details.🙌",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                  height: 1.4),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: spc.hghtRat(0.03),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: spc.wdRat(0.05)),
+                      child: CarouselSlider(
+                        options: CarouselOptions(
+                          height: 200.0,
+                          viewportFraction: 1,
+                        ),
+                        items: [
+                          'assets/images/banner.jpg',
+                          'assets/images/banner2.png',
+                          'assets/images/banner3.png',
+                          'assets/images/banner4.png'
+                        ].map((i) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: FittedBox(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Image.asset(
+                                      i,
+                                      width: spc.wdRat(1),
+                                      height: 200,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                  ]),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: spc.wdRat(0.06)),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const TabBarPage(),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Color.fromARGB(255, 200, 200, 200),
+                                    offset: Offset(0, 0),
+                                    blurRadius: 15)
+                              ]),
+                          child: Column(
+                            children: [
+                              SizedBox(height: 20),
+                              Row(
+                                children: [
+                                  SizedBox(width: 20),
+                                  Text(
+                                    'FEATURING FRESH',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color:
+                                            Color.fromARGB(255, 150, 150, 150),
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ],
+                              ),
+                              Image.asset(
+                                'assets/images/hands_shake.png',
+                                height: spc.hghtRat(0.2),
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                'friends always share!',
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    color: Color.fromARGB(255, 3, 93, 158),
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                'refer your friends to Postpaid and get ₹300 off on',
+                                style: TextStyle(
+                                  fontSize: 13,
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                      );
-                    }).toList(),
+                              Text('your next bill'),
+                              SizedBox(height: 20),
+                              Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: spc.wdRat(0.13),
+                                        vertical: spc.hghtRat(0.01)),
+                                    child: Text(
+                                      'REFER NOW',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  )),
+                              SizedBox(height: 20),
+                            ],
+                          )),
+                      SizedBox(height: spc.hghtRat(0.1)),
+                    ],
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  const TabBarPage(),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           if (showFloatingProfile)
@@ -249,7 +349,7 @@ class _DashBoardState extends State<DashBoard> {
             ).animate().fade(),
         ],
       ),
-      endDrawer: const AppDrawer(),
+      drawer: const AppDrawer(),
     );
   }
 }

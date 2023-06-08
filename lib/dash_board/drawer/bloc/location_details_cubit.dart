@@ -19,6 +19,11 @@ class LocationDetailsCubit extends Cubit<LocationDetails> {
     print(state);
   }
 
+  void setState({required String stateName}) {
+    emit(state.copyWith(state: stateName));
+    print(state);
+  }
+
   void setLandmark({required String landmark}) {
     emit(state.copyWith(landmark: landmark));
     print(state);
@@ -42,6 +47,7 @@ class LocationDetailsCubit extends Cubit<LocationDetails> {
   void setDetails(
       {required String address,
       required String area,
+      required String stateName,
       required String landmark,
       required String city,
       required String zipCode,
@@ -49,6 +55,7 @@ class LocationDetailsCubit extends Cubit<LocationDetails> {
     emit(state.copyWith(
         address: address,
         area: area,
+        state: stateName,
         landmark: landmark,
         city: city,
         zipCode: zipCode,

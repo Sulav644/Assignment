@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils.dart';
+import '../../../congiment/congiment_after_package_selection.dart';
 import '../../../congiment/congiment_page.dart';
+import '../../../congiment/congiment_view.dart';
 import '../../../core/components/bloc/country_flag_cubit.dart';
 import '../../../core/components/profile_banner_centered.dart';
 
@@ -40,9 +42,9 @@ class ChatBanner extends StatelessWidget {
                           backgroundColor: MaterialStateProperty.all(
                               Color.fromARGB(255, 3, 93, 158))),
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) {
-                            return CongimentPage();
+                            return ConsignmentAfterPackageSelection();
                           },
                         ));
                       },

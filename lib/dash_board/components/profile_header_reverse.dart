@@ -18,12 +18,14 @@ class ProfileHeaderReverse extends StatefulWidget {
 class _ProfileHeaderReverseState extends State<ProfileHeaderReverse> {
   FocusNode addressNode = FocusNode();
   FocusNode areaNode = FocusNode();
+  FocusNode stateNode = FocusNode();
   FocusNode landmarkNode = FocusNode();
   FocusNode cityNode = FocusNode();
   FocusNode zipcodeNode = FocusNode();
   FocusNode countryNode = FocusNode();
   late TextEditingController addressController;
   late TextEditingController areaController;
+  late TextEditingController stateController;
   late TextEditingController landmarkController;
   late TextEditingController cityController;
   late TextEditingController zipCodeController;
@@ -36,6 +38,7 @@ class _ProfileHeaderReverseState extends State<ProfileHeaderReverse> {
     super.initState();
     addressController = TextEditingController();
     areaController = TextEditingController();
+    stateController = TextEditingController();
     landmarkController = TextEditingController();
     cityController = TextEditingController();
     zipCodeController = TextEditingController();
@@ -53,6 +56,7 @@ class _ProfileHeaderReverseState extends State<ProfileHeaderReverse> {
     final locationDetails = context.watch<LocationDetailsCubit>().state;
     addressController = TextEditingController(text: locationDetails.address);
     areaController = TextEditingController(text: locationDetails.area);
+    stateController = TextEditingController(text: locationDetails.state);
     landmarkController = TextEditingController(text: locationDetails.landmark);
     cityController = TextEditingController(text: locationDetails.city);
     zipCodeController = TextEditingController(text: locationDetails.zipCode);
@@ -60,7 +64,7 @@ class _ProfileHeaderReverseState extends State<ProfileHeaderReverse> {
     return Container(
       width: spc.wdRat(1),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           AnimatedContainer(
             duration: Duration(milliseconds: 600),
@@ -122,7 +126,7 @@ class _ProfileHeaderReverseState extends State<ProfileHeaderReverse> {
                                                       children: [
                                                         Icon(
                                                           Icons
-                                                              .location_on_outlined,
+                                                              .verified_user_rounded,
                                                           color: Colors.white,
                                                           size: 18,
                                                         ),
@@ -177,6 +181,7 @@ class _ProfileHeaderReverseState extends State<ProfileHeaderReverse> {
                                                 onTap: () {
                                                   addressNode.unfocus();
                                                   areaNode.unfocus();
+                                                  stateNode.unfocus();
                                                   landmarkNode.unfocus();
                                                   cityNode.unfocus();
                                                   zipcodeNode.unfocus();
@@ -251,42 +256,6 @@ class _ProfileHeaderReverseState extends State<ProfileHeaderReverse> {
                                                         ),
                                                         TextField(
                                                           controller:
-                                                              areaController,
-                                                          focusNode: areaNode,
-                                                          decoration:
-                                                              InputDecoration(
-                                                                  hintText:
-                                                                      'Area',
-                                                                  labelText:
-                                                                      'Area',
-                                                                  border:
-                                                                      border,
-                                                                  enabledBorder:
-                                                                      border,
-                                                                  focusedBorder:
-                                                                      border),
-                                                          onChanged: (value) {
-                                                            context
-                                                                .read<
-                                                                    ConfirmedPickupCubit>()
-                                                                .setNotPickedUp();
-                                                            context
-                                                                .read<
-                                                                    LocationDetailsCubit>()
-                                                                .setArea(
-                                                                    area:
-                                                                        value);
-                                                          },
-                                                          textInputAction:
-                                                              TextInputAction
-                                                                  .next,
-                                                        ),
-                                                        SizedBox(
-                                                          height:
-                                                              gapBetweenInputFields,
-                                                        ),
-                                                        TextField(
-                                                          controller:
                                                               landmarkController,
                                                           focusNode:
                                                               landmarkNode,
@@ -324,6 +293,42 @@ class _ProfileHeaderReverseState extends State<ProfileHeaderReverse> {
                                                         ),
                                                         TextField(
                                                           controller:
+                                                              areaController,
+                                                          focusNode: areaNode,
+                                                          decoration:
+                                                              InputDecoration(
+                                                                  hintText:
+                                                                      'Area',
+                                                                  labelText:
+                                                                      'Area',
+                                                                  border:
+                                                                      border,
+                                                                  enabledBorder:
+                                                                      border,
+                                                                  focusedBorder:
+                                                                      border),
+                                                          onChanged: (value) {
+                                                            context
+                                                                .read<
+                                                                    ConfirmedPickupCubit>()
+                                                                .setNotPickedUp();
+                                                            context
+                                                                .read<
+                                                                    LocationDetailsCubit>()
+                                                                .setArea(
+                                                                    area:
+                                                                        value);
+                                                          },
+                                                          textInputAction:
+                                                              TextInputAction
+                                                                  .next,
+                                                        ),
+                                                        SizedBox(
+                                                          height:
+                                                              gapBetweenInputFields,
+                                                        ),
+                                                        TextField(
+                                                          controller:
                                                               cityController,
                                                           focusNode: cityNode,
                                                           decoration:
@@ -332,6 +337,42 @@ class _ProfileHeaderReverseState extends State<ProfileHeaderReverse> {
                                                                       'City',
                                                                   labelText:
                                                                       'City',
+                                                                  border:
+                                                                      border,
+                                                                  enabledBorder:
+                                                                      border,
+                                                                  focusedBorder:
+                                                                      border),
+                                                          onChanged: (value) {
+                                                            context
+                                                                .read<
+                                                                    ConfirmedPickupCubit>()
+                                                                .setNotPickedUp();
+                                                            context
+                                                                .read<
+                                                                    LocationDetailsCubit>()
+                                                                .setCity(
+                                                                    city:
+                                                                        value);
+                                                          },
+                                                          textInputAction:
+                                                              TextInputAction
+                                                                  .next,
+                                                        ),
+                                                        SizedBox(
+                                                          height:
+                                                              gapBetweenInputFields,
+                                                        ),
+                                                        TextField(
+                                                          controller:
+                                                              stateController,
+                                                          focusNode: stateNode,
+                                                          decoration:
+                                                              InputDecoration(
+                                                                  hintText:
+                                                                      'State',
+                                                                  labelText:
+                                                                      'State',
                                                                   border:
                                                                       border,
                                                                   enabledBorder:
@@ -489,7 +530,7 @@ class _ProfileHeaderReverseState extends State<ProfileHeaderReverse> {
                                                 ],
                                               ),
                                               Text(
-                                                'Exclusive Marketer',
+                                                '${locationDetails.city} ${locationDetails.address}',
                                                 style: TextStyle(
                                                     fontSize: 6,
                                                     color: Color.fromARGB(
@@ -537,7 +578,7 @@ class _ProfileHeaderReverseState extends State<ProfileHeaderReverse> {
                         });
 
                         // context.read<FloatingIconStatusCubit>().toggleState();
-                        Scaffold.of(context).openEndDrawer();
+                        Scaffold.of(context).openDrawer();
                       },
                       child: CircleAvatar(
                         radius: 32,

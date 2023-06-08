@@ -39,9 +39,23 @@ class ProfileBannerCentered extends StatelessWidget {
   Widget build(BuildContext context) {
     final spc = Space(context: context);
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => ProfilePage(imgPath: imgPath),
-      )),
+      onTap: () {
+        if (index == 1) {
+          showCountryPicker(
+            context: context,
+            showPhoneCode: false,
+            onSelect: (value) {
+              context.read<CountryFlagCubit>().setFlage(
+                  index: index,
+                  flag: value.countryCode,
+                  countryName: value.displayName
+                      .substring(0, value.displayName.indexOf('(')));
+              print(value.countryCode == 'AL');
+              print(value.countryCode);
+            },
+          );
+        }
+      },
       child: Container(
           width: spc.wdRat(0.33),
           decoration: BoxDecoration(
@@ -80,19 +94,20 @@ class ProfileBannerCentered extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      showCountryPicker(
-                        context: context,
-                        showPhoneCode: false,
-                        onSelect: (value) {
-                          context.read<CountryFlagCubit>().setFlage(
-                              index: index,
-                              flag: value.countryCode,
-                              countryName: value.displayName.substring(
-                                  0, value.displayName.indexOf('(')));
-                          print(value.countryCode == 'AL');
-                          print(value.countryCode);
-                        },
-                      );
+                      if (index == 1)
+                        showCountryPicker(
+                          context: context,
+                          showPhoneCode: false,
+                          onSelect: (value) {
+                            context.read<CountryFlagCubit>().setFlage(
+                                index: index,
+                                flag: value.countryCode,
+                                countryName: value.displayName.substring(
+                                    0, value.displayName.indexOf('(')));
+                            print(value.countryCode == 'AL');
+                            print(value.countryCode);
+                          },
+                        );
                     },
                     child: CountryFlag.fromCountryCode(
                       '$flag',

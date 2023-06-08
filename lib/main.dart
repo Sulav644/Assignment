@@ -3,7 +3,9 @@ import 'package:xoomship/dash_board/components/floating_icon_status_cubit.dart';
 import 'package:xoomship/first_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xoomship/profile_page/components/bloc/add_multiple_address_cubit.dart';
 import 'package:xoomship/second_splash_screen.dart';
+import 'congiment/bloc/congiment_page_change_cubit.dart';
 import 'core/bloc/theme_switch_cubit.dart';
 import 'core/components/bloc/country_flag_cubit.dart';
 import 'dash_board/dash_board.dart';
@@ -27,6 +29,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ConfirmedPickupCubit()),
         BlocProvider(create: (context) => CountryFlagCubit()),
         BlocProvider(create: (context) => LocationDetailsCubit()),
+        BlocProvider(create: (context) => CongimentPageChangeCubit()),
+        BlocProvider(create: (context) => AddMultipleAddressCubit()),
       ],
       child: BlocBuilder<ThemeSwitchCubit, bool>(
         builder: (context, state) {

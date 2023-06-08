@@ -51,23 +51,13 @@ class DrawerImageHeader extends StatelessWidget {
                       ),
                       Image.asset(
                         'assets/images/splash_logo.png',
-                        height: 20,
+                        height: 30,
                       ),
                       const SizedBox(
                         width: 6,
                       ),
                     ],
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        right: Space(context: context).wdRat(0.08)),
-                    child: SvgPicture.asset(
-                      'assets/images/search.svg',
-                      height: 18,
-                      colorFilter: const ColorFilter.mode(
-                          Color.fromARGB(255, 116, 112, 112), BlendMode.srcIn),
-                    ),
-                  )
                 ],
               ),
             ),

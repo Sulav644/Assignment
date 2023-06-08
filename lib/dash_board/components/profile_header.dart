@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:widget_circular_animator/widget_circular_animator.dart';
 import 'package:xoomship/dash_board/components/floating_icon_status_cubit.dart';
 import '../../../core/utils.dart';
+import '../../congiment/notifications.dart';
 import '../../core/components/add_icon.dart';
 import '../../profile_page/profile_page.dart';
 import '../drawer/bloc/location_details_cubit.dart';
@@ -20,12 +21,14 @@ class _ProfileHeaderState extends State<ProfileHeader>
     with TickerProviderStateMixin {
   FocusNode addressNode = FocusNode();
   FocusNode areaNode = FocusNode();
+  FocusNode stateNode = FocusNode();
   FocusNode landmarkNode = FocusNode();
   FocusNode cityNode = FocusNode();
   FocusNode zipcodeNode = FocusNode();
   FocusNode countryNode = FocusNode();
   late TextEditingController addressController;
   late TextEditingController areaController;
+  late TextEditingController stateController;
   late TextEditingController landmarkController;
   late TextEditingController cityController;
   late TextEditingController zipCodeController;
@@ -39,6 +42,7 @@ class _ProfileHeaderState extends State<ProfileHeader>
     super.initState();
     addressController = TextEditingController();
     areaController = TextEditingController();
+    stateController = TextEditingController();
     landmarkController = TextEditingController();
     cityController = TextEditingController();
     zipCodeController = TextEditingController();
@@ -76,6 +80,7 @@ class _ProfileHeaderState extends State<ProfileHeader>
     final locationDetails = context.watch<LocationDetailsCubit>().state;
     addressController = TextEditingController(text: locationDetails.address);
     areaController = TextEditingController(text: locationDetails.area);
+    stateController = TextEditingController(text: locationDetails.state);
     landmarkController = TextEditingController(text: locationDetails.landmark);
     cityController = TextEditingController(text: locationDetails.city);
     zipCodeController = TextEditingController(text: locationDetails.zipCode);
@@ -85,11 +90,22 @@ class _ProfileHeaderState extends State<ProfileHeader>
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            CircleAvatar(
-              backgroundColor: Color.fromARGB(255, 3, 93, 158),
-              child: Icon(
-                color: Colors.white,
-                Icons.notifications_active,
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return Notifications();
+                  }));
+                },
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    color: Color.fromARGB(255, 3, 93, 158),
+                    Icons.notifications_active,
+                  ),
+                ),
               ),
             ),
           ],
@@ -98,7 +114,12 @@ class _ProfileHeaderState extends State<ProfileHeader>
           children: [
             Container(
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      bottomLeft: Radius.circular(30),
+                      topRight: Radius.circular(10),
+                      bottomRight: Radius.circular(10))),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -111,7 +132,7 @@ class _ProfileHeaderState extends State<ProfileHeader>
                             // showLoadButton = !showLoadButton;
                             // isConfirmedPickedUp = false;
                           });
-                          Scaffold.of(context).openEndDrawer();
+                          Scaffold.of(context).openDrawer();
                         },
                         child: Animate().custom(
                           begin: 25,
@@ -143,6 +164,7 @@ class _ProfileHeaderState extends State<ProfileHeader>
                                 onTap: () {
                                   addressNode.unfocus();
                                   areaNode.unfocus();
+                                  stateNode.unfocus();
                                   landmarkNode.unfocus();
                                   cityNode.unfocus();
                                   zipcodeNode.unfocus();
@@ -193,28 +215,6 @@ class _ProfileHeaderState extends State<ProfileHeader>
                                           height: gapBetweenInputFields,
                                         ),
                                         TextField(
-                                          controller: areaController,
-                                          focusNode: areaNode,
-                                          decoration: InputDecoration(
-                                              hintText: 'Area',
-                                              labelText: 'Area',
-                                              border: border,
-                                              enabledBorder: border,
-                                              focusedBorder: border),
-                                          onChanged: (value) {
-                                            context
-                                                .read<ConfirmedPickupCubit>()
-                                                .setNotPickedUp();
-                                            context
-                                                .read<LocationDetailsCubit>()
-                                                .setArea(area: value);
-                                          },
-                                          textInputAction: TextInputAction.next,
-                                        ),
-                                        SizedBox(
-                                          height: gapBetweenInputFields,
-                                        ),
-                                        TextField(
                                           controller: landmarkController,
                                           focusNode: landmarkNode,
                                           decoration: InputDecoration(
@@ -237,6 +237,28 @@ class _ProfileHeaderState extends State<ProfileHeader>
                                           height: gapBetweenInputFields,
                                         ),
                                         TextField(
+                                          controller: areaController,
+                                          focusNode: areaNode,
+                                          decoration: InputDecoration(
+                                              hintText: 'Area',
+                                              labelText: 'Area',
+                                              border: border,
+                                              enabledBorder: border,
+                                              focusedBorder: border),
+                                          onChanged: (value) {
+                                            context
+                                                .read<ConfirmedPickupCubit>()
+                                                .setNotPickedUp();
+                                            context
+                                                .read<LocationDetailsCubit>()
+                                                .setArea(area: value);
+                                          },
+                                          textInputAction: TextInputAction.next,
+                                        ),
+                                        SizedBox(
+                                          height: gapBetweenInputFields,
+                                        ),
+                                        TextField(
                                           controller: cityController,
                                           focusNode: cityNode,
                                           decoration: InputDecoration(
@@ -252,6 +274,28 @@ class _ProfileHeaderState extends State<ProfileHeader>
                                             context
                                                 .read<LocationDetailsCubit>()
                                                 .setCity(city: value);
+                                          },
+                                          textInputAction: TextInputAction.next,
+                                        ),
+                                        SizedBox(
+                                          height: gapBetweenInputFields,
+                                        ),
+                                        TextField(
+                                          controller: stateController,
+                                          focusNode: stateNode,
+                                          decoration: InputDecoration(
+                                              hintText: 'State',
+                                              labelText: 'State',
+                                              border: border,
+                                              enabledBorder: border,
+                                              focusedBorder: border),
+                                          onChanged: (value) {
+                                            context
+                                                .read<ConfirmedPickupCubit>()
+                                                .setNotPickedUp();
+                                            context
+                                                .read<LocationDetailsCubit>()
+                                                .setArea(area: value);
                                           },
                                           textInputAction: TextInputAction.next,
                                         ),
@@ -328,6 +372,9 @@ class _ProfileHeaderState extends State<ProfileHeader>
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              SizedBox(
+                                height: 5,
+                              ),
                               Row(
                                 children: [
                                   Text(
@@ -362,7 +409,7 @@ class _ProfileHeaderState extends State<ProfileHeader>
                                                   children: [
                                                     Icon(
                                                       Icons
-                                                          .location_on_outlined,
+                                                          .verified_user_rounded,
                                                       color: Colors.white,
                                                       size: 18,
                                                     ),
@@ -399,13 +446,16 @@ class _ProfileHeaderState extends State<ProfileHeader>
                                 ],
                               ),
                               SizedBox(
-                                height: 5,
+                                height: 1,
                               ),
                               Text(
-                                'Exclusive Marketer',
+                                '${locationDetails.city} ${locationDetails.address}',
                                 style: TextStyle(
                                     fontSize: 10,
                                     color: Color.fromARGB(255, 138, 136, 136)),
+                              ),
+                              SizedBox(
+                                height: 5,
                               ),
                             ]),
                       ),

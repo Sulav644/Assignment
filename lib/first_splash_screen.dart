@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:jelly_anim/jelly_anim.dart';
 import 'package:video_player/video_player.dart';
 import 'package:xoomship/core/utils.dart';
 import 'package:xoomship/second_splash_screen.dart';
@@ -8,6 +9,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:xoomship/sign_up/phone_number_send_screen.dart';
+
+import 'dash_board/dash_board.dart';
 
 class FirstSplashScreen extends StatefulWidget {
   const FirstSplashScreen({super.key});
@@ -32,13 +36,13 @@ class _FirstSplashScreenState extends State<FirstSplashScreen> {
   void initState() {
     super.initState();
     // playVideo(init: true);
-    // Future.delayed(
-    //     Duration(seconds: 4),
-    //     () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-    //           builder: (context) {
-    //             return SecondSplashScreen();
-    //           },
-    //         )));
+    Future.delayed(
+        Duration(seconds: 4),
+        () => Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) {
+                return PhoneNumberSendScreen();
+              },
+            )));
   }
 
   @override
@@ -69,7 +73,7 @@ class _FirstSplashScreenState extends State<FirstSplashScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 60,
+                      height: spc.hghtRat(0.3),
                     ),
                     Stack(
                       children: [
@@ -83,7 +87,43 @@ class _FirstSplashScreenState extends State<FirstSplashScreen> {
                     SizedBox(
                       height: 20,
                     ),
-
+                    Container(
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: spc.wdRat(0.1)),
+                        child: Row(
+                          children: [
+                            Column(
+                              children: [
+                                SizedBox(height: spc.hghtRat(0.06)),
+                                JellyAnim(
+                                    jellyCount: 3,
+                                    radius: 40,
+                                    viewPortSize: Size(50, 50),
+                                    jellyCoordinates: 10,
+                                    allowOverFlow: true,
+                                    duration: Duration(milliseconds: 200),
+                                    jellyPosition: JellyPosition.centerLeft),
+                              ],
+                            ),
+                            SizedBox(width: spc.wdRat(0.2)),
+                            Column(
+                              children: [
+                                SizedBox(height: spc.hghtRat(0.18)),
+                                JellyAnim(
+                                    jellyCount: 2,
+                                    radius: 10,
+                                    viewPortSize: Size(50, 50),
+                                    jellyCoordinates: 10,
+                                    allowOverFlow: true,
+                                    duration: Duration(milliseconds: 200),
+                                    jellyPosition: JellyPosition.centerLeft),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     // videoPlayerController.value.isInitialized
                     //     ? SizedBox(
                     //         height: 100,

@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../../../core/utils.dart';
+import '../../../profile_page/profile_page.dart';
 
 class AccountLogoWithDetailsForExpandedDrawer extends StatelessWidget {
   const AccountLogoWithDetailsForExpandedDrawer({super.key});
@@ -23,7 +24,7 @@ class AccountLogoWithDetailsForExpandedDrawer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
-                      height: spc.hghtRat(0.08),
+                      height: spc.hghtRat(0.084),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(
@@ -39,10 +40,21 @@ class AccountLogoWithDetailsForExpandedDrawer extends StatelessWidget {
                               const SizedBox(
                                 width: 10,
                               ),
-                              CircleAvatar(
-                                  radius: 15,
-                                  child:
-                                      Image.asset('assets/images/boy_1.png')),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) {
+                                      return ProfilePage(
+                                        imgPath: 'boy_1.png',
+                                      );
+                                    },
+                                  ));
+                                },
+                                child: CircleAvatar(
+                                    radius: 15,
+                                    child:
+                                        Image.asset('assets/images/boy_1.png')),
+                              ),
                               const SizedBox(
                                 width: 8,
                               ),
@@ -57,12 +69,34 @@ class AccountLogoWithDetailsForExpandedDrawer extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
-                                        children: const [
-                                          Text(
-                                            'Nina Argemia',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 13),
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'Nina Argemia',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 13),
+                                              ),
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    color: const Color.fromARGB(
+                                                        255, 7, 106, 187),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: Text(
+                                                    'Verified',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 9),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
                                           ),
                                           Text(
                                             'nina_org@orgemia.com',

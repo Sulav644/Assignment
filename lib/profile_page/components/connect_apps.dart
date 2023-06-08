@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xoomship/profile_page/components/bloc/add_multiple_address_cubit.dart';
 import '../../../core/components/add_icon.dart';
 import '../../core/utils.dart';
+import '../../dash_board/drawer/bloc/location_details_cubit.dart';
 
 class ConnectApps extends StatefulWidget {
   const ConnectApps({super.key});
@@ -32,7 +35,7 @@ class _ConnectAppsState extends State<ConnectApps> {
         SizedBox(
           width: spc.wdRat(0.5),
           child: const Text(
-            "Apps you've connected",
+            "Add Multiple Address",
             style: TextStyle(
                 fontSize: 20, fontWeight: FontWeight.bold, height: 1.3),
           ),
@@ -85,6 +88,11 @@ class _ConnectAppsState extends State<ConnectApps> {
                                   enabledBorder: border,
                                   focusedBorder: border),
                               textInputAction: TextInputAction.next,
+                              onChanged: (value) {
+                                context
+                                    .read<LocationDetailsCubit>()
+                                    .setAddress(address: value);
+                              },
                             ),
                             SizedBox(
                               height: gapBetweenInputFields,
@@ -98,6 +106,11 @@ class _ConnectAppsState extends State<ConnectApps> {
                                   enabledBorder: border,
                                   focusedBorder: border),
                               textInputAction: TextInputAction.next,
+                              onChanged: (value) {
+                                context
+                                    .read<LocationDetailsCubit>()
+                                    .setArea(area: value);
+                              },
                             ),
                             SizedBox(
                               height: gapBetweenInputFields,
@@ -111,6 +124,11 @@ class _ConnectAppsState extends State<ConnectApps> {
                                   enabledBorder: border,
                                   focusedBorder: border),
                               textInputAction: TextInputAction.next,
+                              onChanged: (value) {
+                                context
+                                    .read<LocationDetailsCubit>()
+                                    .setLandmark(landmark: value);
+                              },
                             ),
                             SizedBox(
                               height: gapBetweenInputFields,
@@ -124,6 +142,11 @@ class _ConnectAppsState extends State<ConnectApps> {
                                   enabledBorder: border,
                                   focusedBorder: border),
                               textInputAction: TextInputAction.next,
+                              onChanged: (value) {
+                                context
+                                    .read<LocationDetailsCubit>()
+                                    .setCity(city: value);
+                              },
                             ),
                             SizedBox(
                               height: gapBetweenInputFields,
@@ -137,6 +160,11 @@ class _ConnectAppsState extends State<ConnectApps> {
                                   enabledBorder: border,
                                   focusedBorder: border),
                               textInputAction: TextInputAction.next,
+                              onChanged: (value) {
+                                context
+                                    .read<LocationDetailsCubit>()
+                                    .setZipCode(zipCode: value);
+                              },
                             ),
                             SizedBox(
                               height: gapBetweenInputFields,
@@ -150,21 +178,43 @@ class _ConnectAppsState extends State<ConnectApps> {
                                   enabledBorder: border,
                                   focusedBorder: border),
                               textInputAction: TextInputAction.next,
+                              onChanged: (value) {
+                                context
+                                    .read<LocationDetailsCubit>()
+                                    .setCountry(country: value);
+                              },
                             ),
                             SizedBox(
                               height: spc.hghtRat(0.05),
                             ),
                             Align(
-                              child: Container(
-                                width: spc.wdRat(0.6),
-                                height: spc.hghtRat(0.06),
-                                decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 3, 93, 158),
-                                    borderRadius: BorderRadius.circular(10)),
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'SUBMIT',
-                                  style: TextStyle(color: Colors.white),
+                              child: GestureDetector(
+                                onTap: () {
+                                  final data = context
+                                      .read<LocationDetailsCubit>()
+                                      .state;
+                                  context
+                                      .read<AddMultipleAddressCubit>()
+                                      .addAddress(
+                                          address: data.address!,
+                                          area: data.area!,
+                                          stateName: data.state!,
+                                          landmark: data.landmark!,
+                                          city: data.city!,
+                                          zipCode: data.zipCode!,
+                                          country: data.country!);
+                                },
+                                child: Container(
+                                  width: spc.wdRat(0.6),
+                                  height: spc.hghtRat(0.06),
+                                  decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 3, 93, 158),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'SUBMIT',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                               ),
                             )

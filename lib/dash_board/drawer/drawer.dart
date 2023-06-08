@@ -1,3 +1,4 @@
+import 'package:xoomship/congiment/order_track.dart';
 import 'package:xoomship/core/utils.dart';
 import 'package:xoomship/dash_board/drawer/components/account_logo_with_details_for_expanded_drawer.dart';
 import 'package:xoomship/dash_board/drawer/components/account_logo_with_details_for_unexpanded_drawer.dart';
@@ -5,6 +6,10 @@ import 'package:xoomship/dash_board/drawer/components/tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../congiment/congiment_view.dart';
+import '../../congiment/my_order.dart';
+import '../../congiment/rate_calculator.dart';
+import '../../core/components/profile_banner_centered.dart';
 import 'components/drawer_image_header.dart';
 import 'components/drawer_item.dart';
 import 'components/toggle_button.dart';
@@ -42,7 +47,7 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final spc = Space(context: context);
-    double drawerIconMinGap = spc.hghtRat(0.03);
+    double drawerIconMinGap = spc.hghtRat(0.01);
     int i = 0;
     return SafeArea(
       child: AnimatedContainer(
@@ -104,26 +109,269 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
                             : spc.hghtRat(0.02),
                       ),
 
-                      if (expandDrawer && showDrawerTitles)
-                        TabBarForDrawer(
-                            tabController: tabController,
-                            onClick: (value) => setState(() {
-                                  tabIndex = value;
-                                }),
-                            tabIndex: tabIndex),
-                      if (!expandDrawer)
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: GestureDetector(
-                              onTap: () => resizeDrawer(),
-                              child: SvgPicture.asset(
-                                'assets/images/search.svg',
-                                height: 18,
-                                colorFilter: const ColorFilter.mode(
-                                    Color.fromARGB(255, 116, 112, 112),
-                                    BlendMode.srcIn),
-                              )),
+                      // if (expandDrawer && showDrawerTitles)
+                      //   TabBarForDrawer(
+                      //       tabController: tabController,
+                      //       onClick: (value) => setState(() {
+                      //             tabIndex = value;
+                      //           }),
+                      //       tabIndex: tabIndex),
+
+                      Padding(
+                        padding: EdgeInsets.only(right: 0),
+                        child: Column(
+                          children: [
+                            if (expandDrawer && showDrawerTitles)
+                              Container(
+                                child: TabBar(
+                                    isScrollable: true,
+                                    dividerColor: Colors.transparent,
+                                    indicator: BoxDecoration(
+                                        color: const Color.fromARGB(
+                                            255, 7, 106, 187),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    controller: tabController,
+                                    onTap: (value) => setState(() {
+                                          tabIndex = value;
+                                        }),
+                                    tabs: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 22, vertical: 14),
+                                        child: Text(
+                                          'PERSONAL',
+                                          style: TextStyle(
+                                              color: tabIndex == 0
+                                                  ? Colors.white
+                                                  : const Color.fromARGB(
+                                                      255, 141, 135, 135),
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 22, vertical: 14),
+                                        child: Text(
+                                          'BUSINESS',
+                                          style: TextStyle(
+                                              color: tabIndex == 1
+                                                  ? Colors.white
+                                                  : const Color.fromARGB(
+                                                      255, 141, 135, 135),
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ),
+                                    ]),
+                              ),
+                            Container(
+                              height: spc.hghtRat(0.4),
+                              child: TabBarView(
+                                  controller: tabController,
+                                  children: [
+                                    Column(children: [
+                                      SizedBox(height: spc.hghtRat(0.02)),
+                                      DrawerItem(
+                                          icon: Icons.ballot_rounded,
+                                          title: 'Consignment Book',
+                                          textColor: iconIndex == 0
+                                              ? Colors.black
+                                              : const Color.fromARGB(
+                                                  255, 116, 112, 112),
+                                          iconColor: iconIndex == 0
+                                              ? Colors.black
+                                              : const Color.fromARGB(
+                                                  255, 116, 112, 112),
+                                          onIconClick: () {
+                                            setState(() {
+                                              iconIndex = 0;
+                                            });
+                                            resizeDrawer();
+                                          },
+                                          expandDrawer: expandDrawer,
+                                          showDrawerTitles: showDrawerTitles,
+                                          onItemClick: () {
+                                            setState(() {
+                                              iconIndex = 0;
+                                            });
+                                            Navigator.of(context)
+                                                .pushReplacement(
+                                                    MaterialPageRoute(
+                                              builder: (context) {
+                                                return ConsignmentView();
+                                              },
+                                            ));
+                                          }),
+                                      SizedBox(
+                                        height: drawerIconMinGap,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            left: spc.wdRat(0.02),
+                                            right: spc.wdRat(0.15)),
+                                        child: Divider(
+                                          thickness: 0.6,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: drawerIconMinGap,
+                                      ),
+                                      DrawerItem(
+                                          icon: Icons.near_me_rounded,
+                                          title: 'Track Consignment',
+                                          textColor: iconIndex == 1
+                                              ? Colors.black
+                                              : const Color.fromARGB(
+                                                  255, 116, 112, 112),
+                                          iconColor: iconIndex == 1
+                                              ? Colors.black
+                                              : const Color.fromARGB(
+                                                  255, 116, 112, 112),
+                                          onIconClick: () {
+                                            setState(() {
+                                              iconIndex = 1;
+                                            });
+                                            resizeDrawer();
+                                          },
+                                          expandDrawer: expandDrawer,
+                                          showDrawerTitles: showDrawerTitles,
+                                          onItemClick: () {
+                                            setState(() {
+                                              iconIndex = 1;
+                                            });
+
+                                            Navigator.of(context)
+                                                .push(MaterialPageRoute(
+                                              builder: (context) {
+                                                return const OrderTrack();
+                                              },
+                                            ));
+                                          }),
+                                      SizedBox(
+                                        height: drawerIconMinGap,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            left: spc.wdRat(0.02),
+                                            right: spc.wdRat(0.15)),
+                                        child: Divider(
+                                          thickness: 0.6,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: drawerIconMinGap,
+                                      ),
+                                      DrawerItem(
+                                          icon: Icons.calculate_outlined,
+                                          title: 'Rate Calculator',
+                                          iconColor: iconIndex == 2
+                                              ? Colors.black
+                                              : const Color.fromARGB(
+                                                  255, 116, 112, 112),
+                                          textColor: iconIndex == 2
+                                              ? Colors.black
+                                              : const Color.fromARGB(
+                                                  255, 116, 112, 112),
+                                          expandDrawer: expandDrawer,
+                                          showDrawerTitles: showDrawerTitles,
+                                          onIconClick: () {
+                                            setState(() {
+                                              iconIndex = 2;
+                                            });
+                                            resizeDrawer();
+                                          },
+                                          onItemClick: () {
+                                            setState(() {
+                                              iconIndex = 2;
+                                            });
+                                            Navigator.of(context)
+                                                .pushReplacement(
+                                                    MaterialPageRoute(
+                                              builder: (context) {
+                                                return RateCalculator();
+                                              },
+                                            ));
+                                          }),
+                                      SizedBox(
+                                        height: drawerIconMinGap,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            left: spc.wdRat(0.02),
+                                            right: spc.wdRat(0.15)),
+                                        child: Divider(
+                                          thickness: 0.6,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: drawerIconMinGap,
+                                      ),
+                                      DrawerItem(
+                                          icon: Icons.shopping_bag_rounded,
+                                          title: 'Package',
+                                          textColor: iconIndex == 3
+                                              ? Colors.black
+                                              : const Color.fromARGB(
+                                                  255, 116, 112, 112),
+                                          iconColor: iconIndex == 3
+                                              ? Colors.black
+                                              : const Color.fromARGB(
+                                                  255, 116, 112, 112),
+                                          expandDrawer: expandDrawer,
+                                          showDrawerTitles: showDrawerTitles,
+                                          onIconClick: () {
+                                            setState(() {
+                                              iconIndex = 3;
+                                            });
+                                            resizeDrawer();
+                                          },
+                                          onItemClick: () => setState(() {
+                                                iconIndex = 3;
+                                              })),
+                                    ]),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(height: spc.hghtRat(0.04)),
+                                        ProfileBannerCentered(
+                                            nameColor: Colors.white,
+                                            msgColor: Color.fromARGB(
+                                                255, 221, 218, 218),
+                                            bannerColor: Color.fromARGB(
+                                                255, 13, 97, 165),
+                                            iconColor: Colors.white,
+                                            iconBgColor: Color.fromARGB(
+                                                255, 149, 198, 238),
+                                            imgPath: 'boy_2.png',
+                                            name: 'US',
+                                            messages: 'Vender Registration',
+                                            hasShadow: false,
+                                            flag: 'US',
+                                            countryName: 'United States',
+                                            index: 1),
+                                      ],
+                                    )
+                                  ]),
+                            ),
+                          ],
                         ),
+                      ),
+                      // if (!expandDrawer)
+                      //   Padding(
+                      //     padding: const EdgeInsets.only(left: 10),
+                      //     child: GestureDetector(
+                      //         onTap: () => resizeDrawer(),
+                      //         child: SvgPicture.asset(
+                      //           'assets/images/search.svg',
+                      //           height: 18,
+                      //           colorFilter: const ColorFilter.mode(
+                      //               Color.fromARGB(255, 116, 112, 112),
+                      //               BlendMode.srcIn),
+                      //         )),
+                      //   ),
                       SizedBox(
                         height: expandDrawer
                             ? spc.hghtRat(0.005)
@@ -137,95 +385,17 @@ class _AppDrawerState extends State<AppDrawer> with TickerProviderStateMixin {
                       SizedBox(
                         height: spc.hghtRat(0.02),
                       ),
-                      DrawerItem(
-                          icon: Icons.book_online_outlined,
-                          title: 'Book',
-                          textColor: iconIndex == 0
-                              ? Colors.black
-                              : const Color.fromARGB(255, 116, 112, 112),
-                          iconColor: iconIndex == 0
-                              ? Colors.black
-                              : const Color.fromARGB(255, 116, 112, 112),
-                          onIconClick: () {
-                            setState(() {
-                              iconIndex = 0;
-                            });
-                            resizeDrawer();
-                          },
-                          expandDrawer: expandDrawer,
-                          showDrawerTitles: showDrawerTitles,
-                          onItemClick: () => setState(() {
-                                iconIndex = 0;
-                              })),
+
                       SizedBox(
                         height: drawerIconMinGap,
                       ),
-                      DrawerItem(
-                          icon: Icons.location_on,
-                          title: 'Track',
-                          textColor: iconIndex == 1
-                              ? Colors.black
-                              : const Color.fromARGB(255, 116, 112, 112),
-                          iconColor: iconIndex == 1
-                              ? Colors.black
-                              : const Color.fromARGB(255, 116, 112, 112),
-                          onIconClick: () {
-                            setState(() {
-                              iconIndex = 1;
-                            });
-                            resizeDrawer();
-                          },
-                          expandDrawer: expandDrawer,
-                          showDrawerTitles: showDrawerTitles,
-                          onItemClick: () => setState(() {
-                                iconIndex = 1;
-                              })),
-                      SizedBox(
-                        height: drawerIconMinGap,
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: spc.wdRat(0.02), right: spc.wdRat(0.15)),
+                        child: Divider(
+                          thickness: 0.6,
+                        ),
                       ),
-                      DrawerItem(
-                          icon: Icons.calculate_outlined,
-                          title: 'Rate Calculation',
-                          iconColor: iconIndex == 2
-                              ? Colors.black
-                              : const Color.fromARGB(255, 116, 112, 112),
-                          textColor: iconIndex == 2
-                              ? Colors.black
-                              : const Color.fromARGB(255, 116, 112, 112),
-                          expandDrawer: expandDrawer,
-                          showDrawerTitles: showDrawerTitles,
-                          onIconClick: () {
-                            setState(() {
-                              iconIndex = 2;
-                            });
-                            resizeDrawer();
-                          },
-                          onItemClick: () => setState(() {
-                                iconIndex = 2;
-                              })),
-                      SizedBox(
-                        height: drawerIconMinGap,
-                      ),
-                      DrawerItem(
-                          icon: Icons.shopping_bag_outlined,
-                          title: 'Package',
-                          textColor: iconIndex == 3
-                              ? Colors.black
-                              : const Color.fromARGB(255, 116, 112, 112),
-                          iconColor: iconIndex == 3
-                              ? Colors.black
-                              : const Color.fromARGB(255, 116, 112, 112),
-                          expandDrawer: expandDrawer,
-                          showDrawerTitles: showDrawerTitles,
-                          onIconClick: () {
-                            setState(() {
-                              iconIndex = 3;
-                            });
-                            resizeDrawer();
-                          },
-                          onItemClick: () => setState(() {
-                                iconIndex = 3;
-                              })),
                       SizedBox(
                         height: drawerIconMinGap,
                       ),

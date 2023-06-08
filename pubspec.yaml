@@ -60,6 +60,21 @@ dependencies:
   avatar_glow: ^2.0.2
   google_maps_flutter: ^2.2.8
   material_floating_search_bar: ^0.3.7
+  animation_search_bar: ^0.0.10
+  intl: ^0.18.0
+  scrollable_positioned_list: ^0.3.8
+  calendar_timeline: ^1.1.2
+  qr_flutter: ^4.1.0
+  custom_pointed_popup: ^0.0.4
+  swipeable_button_view: ^0.0.2
+  swipeable_button: ^0.2.0
+  dotted_border: ^2.0.0+3
+  flutter_chips_input: ^2.0.0
+  chips_input: ^0.1.0
+  file_picker: ^5.3.1
+  custom_pop_up_menu: ^1.2.4
+  clip_shadow: ^0.2.1
+  blinking_text: ^1.0.2
 
 dev_dependencies:
   flutter_test:

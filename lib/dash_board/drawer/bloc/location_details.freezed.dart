@@ -20,6 +20,7 @@ mixin _$LocationDetails {
   String? get long => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
   String? get area => throw _privateConstructorUsedError;
+  String? get state => throw _privateConstructorUsedError;
   String? get landmark => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
   String? get zipCode => throw _privateConstructorUsedError;
@@ -41,6 +42,7 @@ abstract class $LocationDetailsCopyWith<$Res> {
       String? long,
       String? address,
       String? area,
+      String? state,
       String? landmark,
       String? city,
       String? zipCode,
@@ -64,6 +66,7 @@ class _$LocationDetailsCopyWithImpl<$Res, $Val extends LocationDetails>
     Object? long = freezed,
     Object? address = freezed,
     Object? area = freezed,
+    Object? state = freezed,
     Object? landmark = freezed,
     Object? city = freezed,
     Object? zipCode = freezed,
@@ -85,6 +88,10 @@ class _$LocationDetailsCopyWithImpl<$Res, $Val extends LocationDetails>
       area: freezed == area
           ? _value.area
           : area // ignore: cast_nullable_to_non_nullable
+              as String?,
+      state: freezed == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
               as String?,
       landmark: freezed == landmark
           ? _value.landmark
@@ -119,6 +126,7 @@ abstract class _$$_LocationDetailsCopyWith<$Res>
       String? long,
       String? address,
       String? area,
+      String? state,
       String? landmark,
       String? city,
       String? zipCode,
@@ -140,6 +148,7 @@ class __$$_LocationDetailsCopyWithImpl<$Res>
     Object? long = freezed,
     Object? address = freezed,
     Object? area = freezed,
+    Object? state = freezed,
     Object? landmark = freezed,
     Object? city = freezed,
     Object? zipCode = freezed,
@@ -161,6 +170,10 @@ class __$$_LocationDetailsCopyWithImpl<$Res>
       area: freezed == area
           ? _value.area
           : area // ignore: cast_nullable_to_non_nullable
+              as String?,
+      state: freezed == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
               as String?,
       landmark: freezed == landmark
           ? _value.landmark
@@ -190,6 +203,7 @@ class _$_LocationDetails extends _LocationDetails {
       this.long,
       this.address,
       this.area,
+      this.state,
       this.landmark,
       this.city,
       this.zipCode,
@@ -205,6 +219,8 @@ class _$_LocationDetails extends _LocationDetails {
   @override
   final String? area;
   @override
+  final String? state;
+  @override
   final String? landmark;
   @override
   final String? city;
@@ -215,7 +231,7 @@ class _$_LocationDetails extends _LocationDetails {
 
   @override
   String toString() {
-    return 'LocationDetails(lat: $lat, long: $long, address: $address, area: $area, landmark: $landmark, city: $city, zipCode: $zipCode, country: $country)';
+    return 'LocationDetails(lat: $lat, long: $long, address: $address, area: $area, state: $state, landmark: $landmark, city: $city, zipCode: $zipCode, country: $country)';
   }
 
   @override
@@ -227,6 +243,7 @@ class _$_LocationDetails extends _LocationDetails {
             (identical(other.long, long) || other.long == long) &&
             (identical(other.address, address) || other.address == address) &&
             (identical(other.area, area) || other.area == area) &&
+            (identical(other.state, state) || other.state == state) &&
             (identical(other.landmark, landmark) ||
                 other.landmark == landmark) &&
             (identical(other.city, city) || other.city == city) &&
@@ -235,8 +252,8 @@ class _$_LocationDetails extends _LocationDetails {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, lat, long, address, area, landmark, city, zipCode, country);
+  int get hashCode => Object.hash(runtimeType, lat, long, address, area, state,
+      landmark, city, zipCode, country);
 
   @JsonKey(ignore: true)
   @override
@@ -251,6 +268,7 @@ abstract class _LocationDetails extends LocationDetails {
       final String? long,
       final String? address,
       final String? area,
+      final String? state,
       final String? landmark,
       final String? city,
       final String? zipCode,
@@ -265,6 +283,8 @@ abstract class _LocationDetails extends LocationDetails {
   String? get address;
   @override
   String? get area;
+  @override
+  String? get state;
   @override
   String? get landmark;
   @override

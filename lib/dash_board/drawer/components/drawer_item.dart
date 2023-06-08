@@ -31,13 +31,16 @@ class DrawerItem extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: 35,
-              height: 30,
+              width: 45,
+              height: 40,
               alignment: Alignment.centerLeft,
-              child: Icon(
-                icon,
-                size: 30,
-                color: iconColor,
+              child: CircleAvatar(
+                radius: 35,
+                child: Icon(
+                  icon,
+                  size: 30,
+                  color: iconColor,
+                ),
               ),
             ),
             SizedBox(

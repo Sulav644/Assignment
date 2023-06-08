@@ -10,6 +10,7 @@ class LocationDetails with _$LocationDetails {
     String? long,
     String? address,
     String? area,
+    String? state,
     String? landmark,
     String? city,
     String? zipCode,
